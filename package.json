@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng build  --prod && firebase deploy" 
   },
   "private": true,
   "dependencies": {
@@ -15,6 +16,7 @@
     "@angular/common": "~10.0.1",
     "@angular/compiler": "~10.0.1",
     "@angular/core": "~10.0.1",
+    "@angular/fire": "^6.0.2",
     "@angular/forms": "~10.0.1",
     "@angular/platform-browser": "~10.0.1",
     "@angular/platform-browser-dynamic": "~10.0.1",
