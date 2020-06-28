@@ -14,7 +14,10 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "strict": true,
+    "allowUnreachableCode": false,
+    "noImplicitAny": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
