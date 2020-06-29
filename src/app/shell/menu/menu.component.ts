@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, HostBinding, HostListener } from '@angular/core';
+import { trigger, state, style, transition, animate, AnimationEvent } from '@angular/animations';
 import { Subject } from 'rxjs';
 
 interface MenuItem {
@@ -13,7 +13,7 @@ interface MenuItem {
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   animations: [
-    trigger('height', [
+    trigger('slideUp', [
       state(
         'void',
         style({
@@ -26,14 +26,17 @@ interface MenuItem {
           transform: 'translateY(0)',
         })
       ),
-      transition('void <=> *', animate('350ms cubic-bezier(0, 0, 0.2, 1)')),
+      transition('void => *', animate('300ms ease-out')),
+      transition('* => void', animate('300ms ease-in')),
     ]),
-  ],
-  host: {
-    '@height': ''
-  }
+  ]
 })
 export class MenuComponent {
+  @HostBinding('@slideUp') get slideIn() {
+    return this.animationState;
+  }
+
+  private animationState = '*';
   closeMenu = new Subject<void>();
 
   menuItems: MenuItem[] = [
@@ -74,8 +77,15 @@ export class MenuComponent {
     },
   ];
 
+  @HostListener('@slideUp.done', ['$event'])
+  onAnimationDone(ev: AnimationEvent): void {
+    if (ev.toState === 'void') {
+      this.closeMenu.next();
+      this.closeMenu.complete();
+    }
+  }
+
   onClose(): void {
-    this.closeMenu.next();
-    this.closeMenu.complete();
+    this.animationState = 'void';
   }
 }

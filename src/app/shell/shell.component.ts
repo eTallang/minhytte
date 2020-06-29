@@ -14,10 +14,8 @@ export class ShellComponent {
   openMenu(): void {
     const portal = new ComponentPortal(MenuComponent);
     const overlayRef = this.overlay.create({
-      hasBackdrop: true,
       width: '100vw',
       height: '100vh',
-      backdropClass: 'menu-overlay',
       positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
       scrollStrategy: this.overlay.scrollStrategies.block(),
     });
