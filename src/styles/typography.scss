@@ -4,13 +4,12 @@ h1 {
   font-weight: 700;
   margin-bottom: 3rem;
   letter-spacing: 0.5px;
-  width: 100%;
   text-align: center;
   position: sticky;
   top: var(--spacing-three);
-  padding-bottom: var(--spacing-three);
-  margin-top: calc(var(--spacing-one) * 5);
+  padding-bottom: var(--spacing-two);
   background-color: var(--color-bg);
+  margin: calc(var(--spacing-one) * 5) calc(var(--spacing-two) * -1) var(--spacing-one);
 }
 
 h2 {

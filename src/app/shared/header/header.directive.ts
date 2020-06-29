@@ -21,7 +21,7 @@ export class HeaderDirective implements OnInit {
   constructor(private elementRef: ElementRef<HTMLElement>) { }
 
   ngOnInit(): void {
-    fromEvent(document, 'scroll').subscribe(() => {
+    fromEvent(window, 'scroll').subscribe(() => {
       console.log(this.elementRef.nativeElement.style.top);
     });
   }

@@ -35,6 +35,7 @@
   background-color: var(--color-primary);
   opacity: 0;
   transition: opacity 300ms ease;
+  user-select: none;
   
   &.faded {
     opacity: 0.3;
