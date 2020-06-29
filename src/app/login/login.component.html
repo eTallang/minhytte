@@ -1,0 +1,14 @@
+<h1>Hvaler</h1>
+
+<form [formGroup]="fg" (submit)="signIn()" class="login-form">
+  <label class="form-group">
+    <div>E-post</div>
+    <input type="email" required formControlName="email" />
+  </label>
+
+  <label class="form-group">
+    <div>Passord</div>
+    <input type="password" required formControlName="password" />
+  </label>
+  <button [disabled]="fg.invalid">Logg inn</button>
+</form>

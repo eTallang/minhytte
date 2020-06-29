@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 
 import { ShoppingListRoutingModule } from './shopping-list-routing.module';
@@ -10,7 +11,8 @@ import { HeaderModule } from '../shared/header/header.module';
   imports: [
     CommonModule,
     ShoppingListRoutingModule,
-    HeaderModule
+    HeaderModule,
+    AngularFirestoreModule
   ]
 })
 export class ShoppingListModule { }

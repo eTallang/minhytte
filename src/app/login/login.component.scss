@@ -1,0 +1,22 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 var(--spacing-one);
+}
+
+input {
+  padding: var(--spacing-half) var(--spacing-two);
+  border-radius: var(--spacing-half);
+  border: 2px solid var(--color-primary);
+  margin-top: var(--spacing-half);
+  min-width: 100px;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-two);
+  width: 100%;
+  max-width: 300px;
+}

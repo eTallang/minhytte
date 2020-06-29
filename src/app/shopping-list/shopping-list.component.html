@@ -1,2 +1,4 @@
 <h1>Handleliste</h1>
-<p>Her kommer handlelisten...</p>
+<ul>
+  <li *ngFor="let item of items | async as list">{{item.value}}</li>
+</ul>
