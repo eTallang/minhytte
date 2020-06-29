@@ -1,4 +1,4 @@
-@import "mixins";
+@import 'mixins';
 
 .fab {
   @include button-reset();
@@ -15,7 +15,8 @@
     color: white;
   }
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     background-color: var(--color-primary-100);
   }
 }

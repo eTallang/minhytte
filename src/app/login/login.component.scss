@@ -1,22 +1,81 @@
+@import 'mixins';
+
+:host {
+  background: linear-gradient(var(--color-primary), var(--color-primary-200));
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 0 0 var(--spacing-four);
+  padding: 0;
+  position: static;
+  background-color: transparent;
+  color: var(--color-text-dark);
+  font-weight: 300;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0 var(--spacing-one);
+  z-index: 1;
 }
 
 input {
-  padding: var(--spacing-half) var(--spacing-two);
-  border-radius: var(--spacing-half);
-  border: 2px solid var(--color-primary);
-  margin-top: var(--spacing-half);
-  min-width: 100px;
+  @include input-placeholder() {
+    color: rgba(255, 255, 255, .5);
+  }
+
+  padding: var(--spacing-quarter) 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid var(--color-bg);
   width: 100%;
+  background-color: transparent;
+  margin-bottom: var(--spacing-one-and-half);
+  max-width: 200px;
+  width: 100%;
+  color: var(--color-text-dark);
 }
 
-.form-group {
-  margin-bottom: var(--spacing-two);
-  width: 100%;
-  max-width: 300px;
+.login-button {
+  @include button-reset();
+
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-one) var(--spacing-two);
+  background-color: transparent;
+  font-size: 1rem;
+  margin-top: 20vh;
+
+  mh-icon {
+    margin-left: var(--spacing-one);
+    transform: rotate(180deg);
+    height: var(--spacing-one-and-half);
+  }
+}
+
+.wave-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  
+  .wave {
+    display: block;
+    margin-bottom: -4px;
+    width: 140%;
+  }
+
+  .wave-filler {
+    background-color: var(--color-bg);
+    height: 14vh;
+  }
 }

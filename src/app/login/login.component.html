@@ -1,14 +1,13 @@
-<h1>Hvaler</h1>
-
+<h1>Velkommen!</h1>
+<div class="wave-container">
+  <img src="assets/waves.svg" alt="Waves" class="wave">
+  <div class="wave-filler"></div>
+</div>
 <form [formGroup]="fg" (submit)="signIn()" class="login-form">
-  <label class="form-group">
-    <div>E-post</div>
-    <input type="email" required formControlName="email" />
-  </label>
-
-  <label class="form-group">
-    <div>Passord</div>
-    <input type="password" required formControlName="password" />
-  </label>
-  <button [disabled]="fg.invalid">Logg inn</button>
+  <input placeholder="E-post" type="email" required formControlName="email" />
+  <input placeholder="Passord" type="password" required formControlName="password" />
+  <button class="paragraph login-button" [disabled]="fg.invalid">
+    Logg inn
+    <mh-icon theme="light" name="chevron-back" size="medium"></mh-icon>
+  </button>
 </form>
