@@ -1,0 +1,10 @@
+<h1>Meny</h1>
+<div class="grid-container">
+  <a cdkMonitorElementFocus class="menu-item link" *ngFor="let menuItem of menuItems">
+    <mh-icon [name]="menuItem.icon"></mh-icon>
+    {{menuItem.name}}
+  </a>
+</div>
+<button class="fab" (click)="onClose()">
+  <mh-icon name="menu"></mh-icon>
+</button>

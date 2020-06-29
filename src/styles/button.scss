@@ -1,0 +1,21 @@
+@import "mixins";
+
+.fab {
+  @include button-reset();
+
+  position: fixed;
+  bottom: var(--spacing-two);
+  right: var(--spacing-two);
+  width: var(--spacing-four);
+  height: var(--spacing-four);
+  background-color: var(--color-primary);
+  border-radius: 50%;
+
+  ion-icon {
+    color: white;
+  }
+
+  &:focus, &:hover {
+    background-color: var(--color-primary-100);
+  }
+}

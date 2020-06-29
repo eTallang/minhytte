@@ -1,7 +1,23 @@
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import './styles/button';
+@import './styles/overlay';
+@import './styles/palette';
+@import './styles/spacing';
 @import './styles/typography';
 
 html,
 body {
   margin: 0;
   font-family: "Quicksand", sans-serif;
+}
+
+body {
+  padding: var(--spacing-two);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+* {
+  color: var(--color-text-primary);
+  box-sizing: border-box;
 }

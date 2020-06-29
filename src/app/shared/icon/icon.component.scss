@@ -1,0 +1,26 @@
+.icon {
+  fill: none;
+
+  &.small {
+    width: var(--spacing-one);
+    height: var(--spacing-one);
+  }
+
+  &.medium {
+    width: var(--spacing-one-and-half);
+    height: var(--spacing-one-and-half);
+  }
+
+  &.large {
+    width: var(--spacing-two);
+    height: var(--spacing-two);
+  }
+
+  &.dark {
+    stroke: var(--color-text-dark-100);
+  }
+
+  &.light {
+    stroke: var(--color-text-light);
+  }
+}
