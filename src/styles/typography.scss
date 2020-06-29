@@ -9,7 +9,8 @@ h1 {
   position: sticky;
   top: var(--spacing-three);
   padding-bottom: var(--spacing-three);
-  margin-top: calc(var(--spacing-one) * 7);
+  margin-top: calc(var(--spacing-one) * 5);
+  background-color: var(--color-bg);
 }
 
 h2 {

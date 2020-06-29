@@ -3,9 +3,9 @@
   <p class="user-name">Erik</p>
 </div>
 <div class="router-container" [ngClass]="{'faded': menuIsOpen}">
-  <div class="backdrop"></div>
   <router-outlet></router-outlet>
 </div>
+<div class="backdrop" [ngClass]="{'faded': menuIsOpen}"></div>
 <button class="fab" (click)="openMenu()">
   <mh-icon name="menu"></mh-icon>
 </button>

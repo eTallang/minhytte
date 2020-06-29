@@ -33,7 +33,8 @@
 
 h1 {
   color: var(--color-text-dark);
-  margin-top: calc(var(--spacing-one) * 6);
+  background-color: transparent;
+  margin-top: calc(var(--spacing-one) * 5);
 }
 
 .menu-item {
