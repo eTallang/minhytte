@@ -9,9 +9,12 @@ import { MenuComponent } from './menu/menu.component';
   styleUrls: ['./shell.component.scss'],
 })
 export class ShellComponent {
+  menuIsOpen = false;
+
   constructor(private overlay: Overlay) {}
 
   openMenu(): void {
+    this.menuIsOpen = true;
     const portal = new ComponentPortal(MenuComponent);
     const overlayRef = this.overlay.create({
       width: '100vw',
@@ -20,7 +23,8 @@ export class ShellComponent {
       scrollStrategy: this.overlay.scrollStrategies.block(),
     });
     const componentRef = overlayRef.attach(portal);
-    componentRef.instance.closeMenu.subscribe(() => {
+    componentRef.instance.closeStart.subscribe(() => this.menuIsOpen = false);
+    componentRef.instance.closeEnd.subscribe(() => {
       overlayRef?.dispose();
       overlayRef?.detach();
     });

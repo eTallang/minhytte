@@ -1,6 +1,6 @@
 <h1>Meny</h1>
 <div class="grid-container">
-  <a cdkMonitorElementFocus class="menu-item link" *ngFor="let menuItem of menuItems">
+  <a routerLinkActive="active" [routerLink]="menuItem.url" cdkMonitorElementFocus class="menu-item link" *ngFor="let menuItem of menuItems">
     <mh-icon [name]="menuItem.icon"></mh-icon>
     {{menuItem.name}}
   </a>

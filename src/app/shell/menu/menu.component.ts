@@ -37,12 +37,13 @@ export class MenuComponent {
   }
 
   private animationState = '*';
-  closeMenu = new Subject<void>();
+  closeStart = new Subject<void>();
+  closeEnd = new Subject<void>();
 
   menuItems: MenuItem[] = [
     {
       name: 'Guider',
-      icon: 'book',
+      icon: 'clipboard',
       url: 'guides',
     },
     {
@@ -61,9 +62,9 @@ export class MenuComponent {
       url: 'logg',
     },
     {
-      name: 'Hyttebok',
-      icon: 'clipboard',
-      url: 'cabin-book',
+      name: 'Om hytta',
+      icon: 'information-circle',
+      url: 'about',
     },
     {
       name: 'Turer',
@@ -80,12 +81,14 @@ export class MenuComponent {
   @HostListener('@slideUp.done', ['$event'])
   onAnimationDone(ev: AnimationEvent): void {
     if (ev.toState === 'void') {
-      this.closeMenu.next();
-      this.closeMenu.complete();
+      this.closeEnd.next();
+      this.closeEnd.complete();
     }
   }
 
   onClose(): void {
+    this.closeStart.next();
+    this.closeStart.complete();
     this.animationState = 'void';
   }
 }

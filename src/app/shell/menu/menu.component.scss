@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
-  gap: calc(0.3rem + 3vw);
+  gap: calc(0.3rem + 4vw);
   padding: 0 var(--spacing-one-and-half);
 }
 
@@ -46,6 +46,7 @@ h1 {
   flex-direction: column;
   border-radius: 50%;
   color: var(--color-text-dark);
+  text-decoration: none;
 
   ion-icon {
     margin-bottom: var(--spacing-quarter);
@@ -53,7 +54,14 @@ h1 {
     --ionicon-stroke-width: 1px;
   }
 
-  &:focus, &:hover {
-    background-color: var(--color-primary-200);
+  &:not(.active) {
+    &:focus,
+    &:hover {
+      background-color: var(--color-primary-200);
+    }
+  }
+
+  &.active {
+    background-color: var(--color-secondary);
   }
 }

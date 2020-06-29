@@ -6,7 +6,18 @@ import { ShellComponent } from './shell/shell.component';
 const routes: Routes = [
   {
     path: '',
-    component: ShellComponent
+    component: ShellComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'shopping-list',
+        pathMatch: 'full'
+      },
+      {
+        path: 'shopping-list',
+        loadChildren: () => import('./shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
+      }
+    ]
   }
 ];
 

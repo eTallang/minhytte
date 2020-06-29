@@ -2,7 +2,9 @@
   <mh-icon theme="light" size="medium" class="back-icon" name="chevron-back"></mh-icon>
   <p class="user-name">Erik</p>
 </div>
-<router-outlet></router-outlet>
+<div class="router-container" [ngClass]="{'faded': menuIsOpen}">
+  <router-outlet></router-outlet>
+</div>
 <button class="fab" (click)="openMenu()">
   <mh-icon name="menu"></mh-icon>
 </button>
