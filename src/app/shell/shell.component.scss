@@ -1,11 +1,12 @@
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: var(--spacing-one) var(--spacing-two);
 }
 
 .back-icon {
@@ -14,4 +15,27 @@
 
 .user-name {
   color: var(--color-primary);
+}
+
+.router-container {
+  transition: transform 300ms ease;
+  padding: var(--spacing-two);
+
+  .backdrop {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    margin: calc(var(--spacing-two) * -1);
+    background-color: var(--color-primary);
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  &.faded {
+    transform: translateY(-70%);
+
+    .backdrop {
+      opacity: 0.3;
+    }
+  }
 }
