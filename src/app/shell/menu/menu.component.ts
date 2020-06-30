@@ -26,7 +26,7 @@ interface MenuItem {
           transform: 'translateY(0)',
         })
       ),
-      transition('void => *', animate('300ms cubic-bezier(0, 0.2, 0.1, 1)')),
+      transition('void => *', animate('300ms cubic-bezier(0, 0, 0.4, 1)')),
       transition('* => void', animate('300ms ease-in')),
     ]),
   ]

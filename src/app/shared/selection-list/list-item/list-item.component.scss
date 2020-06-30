@@ -1,8 +1,7 @@
 @import 'mixins';
 
-$check-duration: 150ms;
-
 :host {
+  --check-duration: 150ms;
   display: block;
 
   &:not(:last-of-type) {
@@ -36,8 +35,8 @@ $check-duration: 150ms;
   background-color: transparent;
   border-radius: var(--spacing-quarter);
   position: relative;
+  transition: background-color var(--check-duration) ease;
 }
-
 
 .checkbox__short-line,
 .checkbox__long-line {
@@ -46,19 +45,19 @@ $check-duration: 150ms;
   transform-origin: left center;
   border-radius: 1px;
   background-color: var(--color-bg);
-  animation-duration: $check-duration;
-  animation-fill-mode: forwards;
+  opacity: 0;
+  transition: opacity var(--check-duration) ease;
 }
 
 .checkbox__short-line {
-  transform: rotate(45deg) scaleX(0);
+  transform: rotate(45deg);
   top: calc(50% - 2px);
   left: calc(50% - 5px);
   width: 5px;
 }
 
 .checkbox__long-line {
-  transform: rotate(-45deg) scaleX(0);
+  transform: rotate(-45deg);
   top: calc(50% + 2px);
   left: calc(50% - 2.2px);
   width: 10px;
@@ -81,33 +80,8 @@ $check-duration: 150ms;
     background: var(--color-primary);
   }
 
-  .checkbox__short-line {
-    animation-name: short-line;
-  }
-
+  .checkbox__short-line,
   .checkbox__long-line {
-    animation-name: long-line;
-    animation-delay: $check-duration;
-  }
-}
-
-
-@keyframes short-line {
-  from {
-    transform: rotate(45deg) scaleX(0);
-  }
-
-  to {
-    transform: rotate(45deg) scaleX(1);
-  }
-}
-
-@keyframes long-line {
-  from {
-    transform: rotate(-45deg) scaleX(0);
-  }
-
-  to {
-    transform: rotate(-45deg) scaleX(1);
+    opacity: 1;
   }
 }

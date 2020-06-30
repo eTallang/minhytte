@@ -22,7 +22,7 @@ export class ShoppingListComponent implements OnInit {
   }
 
   toggleItem(item: Item): void {
-    this.service.toggleItem(item);
+    // this.service.toggleItem(item);
   }
 
   changeValue(item: Item, value: string) {

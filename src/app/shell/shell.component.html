@@ -1,8 +1,10 @@
 <div class="header">
-  <mh-icon theme="light" size="medium" class="back-icon" name="chevron-back"></mh-icon>
+  <a (click)="navigateBack()">
+    <mh-icon theme="light" size="medium" class="back-icon" name="chevron-back"></mh-icon>
+  </a>
   <p class="user-name">Erik</p>
 </div>
-<div class="router-container" [ngClass]="{'faded': menuIsOpen}">
+<div class="router-container" [ngClass]="{ faded: menuIsOpen }">
   <router-outlet></router-outlet>
 </div>
 <!-- <div class="backdrop" [ngClass]="{'faded': menuIsOpen}"></div> -->
