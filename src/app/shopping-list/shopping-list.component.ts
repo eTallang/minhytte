@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { Item } from './item';
 import { ShoppingListService } from './shopping-list.service';
+import { listAnimation } from '../core/animations';
 
 @Component({
   selector: 'mh-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.scss']
+  styleUrls: ['./shopping-list.component.scss'],
+  animations: [
+    listAnimation
+  ]
 })
 export class ShoppingListComponent implements OnInit {
   remaining: Item[] = [];
@@ -22,10 +26,14 @@ export class ShoppingListComponent implements OnInit {
   }
 
   toggleItem(item: Item): void {
-    // this.service.toggleItem(item);
+    this.service.toggleItem(item);
   }
 
   changeValue(item: Item, value: string) {
     this.service.changeItemValue(item, value);
+  }
+
+  removeValue(item: Item): void {
+    this.service.removeItem(item);
   }
 }

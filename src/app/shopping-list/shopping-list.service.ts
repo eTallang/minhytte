@@ -46,6 +46,10 @@ export class ShoppingListService {
     this.store.collection(this.collectionName).doc(item.id).update({ inBasket: item.inBasket });
   }
 
+  removeItem(item: Item): void {
+    this.store.collection(this.collectionName).doc(item.id).delete();
+  }
+
   changeItemValue(item: Item, value: string): void {
     if (!item.value) {
       this.createItem(value);

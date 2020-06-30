@@ -12,6 +12,8 @@ export class ListItemComponent implements AfterViewInit {
   @ViewChild('label') labelElement!: ElementRef<HTMLElement>;
   @ViewChild('input') inputElement!: ElementRef<HTMLInputElement>;
 
+  showDeleteButton = false;
+
   @Input()
   get checked(): boolean {
     return this._checked;
@@ -25,6 +27,7 @@ export class ListItemComponent implements AfterViewInit {
 
   @Output() checkChange = new EventEmitter<boolean>();
   @Output() valueChange = new EventEmitter<string>();
+  @Output() remove = new EventEmitter<void>();
 
   constructor(private focusMonitor: FocusMonitor) {}
 
@@ -48,11 +51,16 @@ export class ListItemComponent implements AfterViewInit {
 
   onInputKeydown(event: KeyboardEvent): void {
     if (event.code === 'Enter') {
-      this.onBlur();
+      this.onInputBlur();
     }
   }
 
-  onBlur(): void {
+  onInputFocus(): void {
+    this.showDeleteButton = true;
+  }
+
+  onInputBlur(): void {
+    this.showDeleteButton = false;
     const inputValue = this.inputElement.nativeElement.value;
     if (this.value !== inputValue) {
       this.value = inputValue;

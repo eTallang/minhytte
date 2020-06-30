@@ -20,6 +20,17 @@
   &.has-value {
     cursor: pointer;
   }
+
+  &.checked {
+    .checkbox-container {
+      background: var(--color-primary);
+    }
+
+    .checkbox__short-line,
+    .checkbox__long-line {
+      opacity: 1;
+    }
+  }
 }
 
 .checkbox-container,
@@ -75,13 +86,11 @@
   outline: none;
 }
 
-.checked {
-  .checkbox-container {
-    background: var(--color-primary);
-  }
+.delete-button {
+  @include button-reset();
 
-  .checkbox__short-line,
-  .checkbox__long-line {
-    opacity: 1;
-  }
+  margin-left: auto;
+  background-color: transparent;
+  width: var(--spacing-one);
+  height: var(--spacing-one);
 }

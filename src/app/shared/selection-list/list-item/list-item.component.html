@@ -15,5 +15,9 @@
   <ng-template #addIcon>
     <mh-icon theme="light" name="add" size="small" class="add-icon"></mh-icon>
   </ng-template>
-  <input class="item-input paragraph" placeholder="Legg til ny..." (blur)="onBlur()" (keydown)="onInputKeydown($event)" [value]="value" #input/>
+  <input class="item-input paragraph" placeholder="Legg til ny..." (focus)="onInputFocus()" (blur)="onInputBlur()" (keydown)="onInputKeydown($event)" [value]="value" #input/>
+
+  <button class="delete-button" *ngIf="showDeleteButton" (click)="remove.emit()">
+    <mh-icon theme="light" size="small" name="close"></mh-icon>
+  </button>
 </label>

@@ -1,12 +1,12 @@
 <h1>Handleliste</h1>
-<mh-selection-list>
-  <mh-list-item *ngFor="let item of remaining" [value]="item.value" [checked]="item.inBasket" (checkChange)="toggleItem(item)" (valueChange)="changeValue(item, $event)"></mh-list-item>
+<mh-selection-list [@listAnimation]="remaining.length">
+  <mh-list-item *ngFor="let item of remaining" [value]="item.value" [checked]="item.inBasket" (remove)="removeValue(item)" (checkChange)="toggleItem(item)" (valueChange)="changeValue(item, $event)"></mh-list-item>
 </mh-selection-list>
 <hr class="separator" />
 <h2>I handlekurven</h2>
 <p *ngIf="!inBasket.length; else basketList">Ingen varer i handlekurven...</p>
 <ng-template #basketList>
-  <mh-selection-list>
-    <mh-list-item *ngFor="let item of inBasket" [value]="item.value" [checked]="item.inBasket" (checkChange)="toggleItem(item)"  (valueChange)="changeValue(item, $event)"></mh-list-item>
+  <mh-selection-list [@listAnimation]="remaining.length">
+    <mh-list-item *ngFor="let item of inBasket" [value]="item.value" [checked]="item.inBasket" (remove)="removeValue(item)" (checkChange)="toggleItem(item)"  (valueChange)="changeValue(item, $event)"></mh-list-item>
   </mh-selection-list>
 </ng-template>
