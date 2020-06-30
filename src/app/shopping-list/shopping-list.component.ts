@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
-interface Item {
-  id: string;
-  value: string;
-  added: Date;
-  inBasket: boolean;
-  removed: boolean;
-}
+import { Item } from './item';
+import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'mh-shopping-list',
@@ -16,11 +9,23 @@ interface Item {
   styleUrls: ['./shopping-list.component.scss']
 })
 export class ShoppingListComponent implements OnInit {
-  items!: Observable<Item[]>;
+  remaining: Item[] = [];
+  inBasket: Item[] = [];
 
-  constructor(private store: AngularFirestore) {}
+  constructor(private service: ShoppingListService) {}
 
   ngOnInit(): void {
-    this.items = this.store.collection('shopping-list').valueChanges() as Observable<Item[]>;
+    this.service.getItems().subscribe(set => {
+      this.remaining = set.remaining;
+      this.inBasket = set.inBasket;
+    });
+  }
+
+  toggleItem(item: Item): void {
+    this.service.toggleItem(item);
+  }
+
+  changeValue(item: Item, value: string) {
+    this.service.changeItemValue(item, value);
   }
 }

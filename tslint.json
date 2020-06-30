@@ -76,6 +76,7 @@
       true,
       "as-needed"
     ],
+    "object-literal-shorthand": false,
     "quotemark": [
       true,
       "single"
@@ -112,13 +113,7 @@
         }
       ]
     },
-    "variable-name": {
-      "options": [
-        "ban-keywords",
-        "check-format",
-        "allow-pascal-case"
-      ]
-    },
+    "variable-name": false,
     "whitespace": {
       "options": [
         "check-branch",
@@ -133,7 +128,7 @@
     "no-host-metadata-property": false,
     "no-input-rename": true,
     "no-inputs-metadata-property": true,
-    "no-output-native": true,
+    "no-output-native": false,
     "no-output-on-prefix": true,
     "no-output-rename": true,
     "no-outputs-metadata-property": true,

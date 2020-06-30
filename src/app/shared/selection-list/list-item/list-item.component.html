@@ -1,0 +1,19 @@
+<label class="list-item-container" [ngClass]="{ checked: checked, 'has-value': value }" #label>
+  <input
+    type="checkbox"
+    class="cdk-visually-hidden"
+    #checkbox
+    [checked]="checked"
+    [attr.aria-checked]="checked"
+    (change)="onInputChange($event)"
+    (click)="$event.stopPropagation()"
+  />
+  <div class="checkbox-container" *ngIf="value; else addIcon">
+    <div class="checkbox__short-line"></div>
+    <div class="checkbox__long-line"></div>
+  </div>
+  <ng-template #addIcon>
+    <mh-icon theme="light" name="add" size="small" class="add-icon"></mh-icon>
+  </ng-template>
+  <input class="item-input paragraph" placeholder="Legg til ny..." (blur)="onBlur()" (keydown)="onInputKeydown($event)" [value]="value" #input/>
+</label>

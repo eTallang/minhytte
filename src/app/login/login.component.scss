@@ -1,7 +1,4 @@
-@import '~@angular/cdk/text-field/text-field'; 
 @import 'mixins';
-
-@include cdk-text-field();
 
 :host {
   background: linear-gradient(var(--color-primary), var(--color-primary-200));
@@ -35,8 +32,6 @@ input {
   @include input-placeholder() {
     color: rgba(255, 255, 255, .5);
   }
-
-  @include cdk-text-field-autofill-color(transparent, red);
 
   padding: var(--spacing-quarter) 0;
   border-radius: 0;

@@ -1,4 +1,5 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
+@import '~@angular/cdk/a11y-prebuilt.css';
 @import './styles/button';
 @import './styles/palette';
 @import './styles/spacing';
@@ -7,7 +8,6 @@
 html,
 body {
   margin: 0;
-  font-family: "Quicksand", sans-serif;
 }
 
 body {
@@ -16,6 +16,7 @@ body {
 }
 
 * {
+  font-family: "Quicksand", sans-serif;
   color: var(--color-text-primary);
   box-sizing: border-box;
 }
