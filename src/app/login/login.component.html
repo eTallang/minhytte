@@ -6,7 +6,8 @@
 <form [formGroup]="fg" (submit)="signIn()" class="login-form">
   <input placeholder="E-post" type="email" required formControlName="email" />
   <input placeholder="Passord" type="password" required formControlName="password" />
-  <button class="paragraph login-button" [disabled]="fg.invalid">
+  <span class="error">{{error}}</span>
+  <button class="paragraph login-button" cdkMonitorElementFocus [disabled]="fg.invalid || signingIn">
     Logg inn
     <mh-icon theme="light" name="chevron-back" size="medium"></mh-icon>
   </button>

@@ -1,4 +1,7 @@
+@import '~@angular/cdk/text-field/text-field'; 
 @import 'mixins';
+
+@include cdk-text-field();
 
 :host {
   background: linear-gradient(var(--color-primary), var(--color-primary-200));
@@ -24,6 +27,7 @@ h1 {
   align-items: center;
   justify-content: center;
   margin: 0 var(--spacing-one);
+  width: 100%;
   z-index: 1;
 }
 
@@ -31,6 +35,8 @@ input {
   @include input-placeholder() {
     color: rgba(255, 255, 255, .5);
   }
+
+  @include cdk-text-field-autofill-color(transparent, red);
 
   padding: var(--spacing-quarter) 0;
   border-radius: 0;
@@ -41,7 +47,20 @@ input {
   margin-bottom: var(--spacing-one-and-half);
   max-width: 200px;
   width: 100%;
+  height: var(--spacing-two);
+  font-size: var(--spacing-one);
   color: var(--color-text-dark);
+  outline: none;
+
+  &:focus {
+    border-bottom-color: var(--color-secondary);
+  }
+}
+
+.error {
+  height: var(--spacing-two);
+  color: var(--color-secondary);
+  font-size: 0.875rem;
 }
 
 .login-button {
@@ -52,12 +71,22 @@ input {
   padding: var(--spacing-one) var(--spacing-two);
   background-color: transparent;
   font-size: 1rem;
+  border-radius: var(--spacing-half);
   margin-top: 20vh;
 
   mh-icon {
     margin-left: var(--spacing-one);
     transform: rotate(180deg);
     height: var(--spacing-one-and-half);
+  }
+
+  &:hover:not(:disabled), &.cdk-keyboard-focused {
+    background-color: var(--color-text-dark-100);
+  }
+
+  &:disabled {
+    cursor: default;
+    color: var(--color-text-secondary);
   }
 }
 
