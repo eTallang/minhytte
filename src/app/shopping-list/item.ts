@@ -1,4 +1,4 @@
-export interface Item {
+export class Item {
   id?: string;
   value?: string;
   added?: Date;
@@ -6,7 +6,9 @@ export interface Item {
   removed?: boolean;
 }
 
-export interface ItemSet {
-  inBasket: Item[];
-  remaining: Item[];
+export interface ItemChange {
+  change: 'added' | 'modified' | 'removed';
+  oldIndex: number;
+  newIndex: number;
+  value: Item;
 }

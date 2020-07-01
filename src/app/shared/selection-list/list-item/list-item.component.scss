@@ -5,7 +5,8 @@
   display: block;
 
   &:not(:last-of-type) {
-    margin-bottom: var(--spacing-one);
+    // margin-bottom: var(--spacing-one);
+    height: var(--spacing-two);
   }
 }
 
@@ -93,4 +94,5 @@
   background-color: transparent;
   width: var(--spacing-one);
   height: var(--spacing-one);
+  flex: none;
 }

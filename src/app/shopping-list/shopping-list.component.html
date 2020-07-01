@@ -6,7 +6,7 @@
 <h2>I handlekurven</h2>
 <p *ngIf="!inBasket.length; else basketList">Ingen varer i handlekurven...</p>
 <ng-template #basketList>
-  <mh-selection-list [@listAnimation]="remaining.length">
+  <mh-selection-list [@listAnimation]="inBasket.length">
     <mh-list-item *ngFor="let item of inBasket" [value]="item.value" [checked]="item.inBasket" (remove)="removeValue(item)" (checkChange)="toggleItem(item)"  (valueChange)="changeValue(item, $event)"></mh-list-item>
   </mh-selection-list>
 </ng-template>
