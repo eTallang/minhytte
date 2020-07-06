@@ -5,14 +5,14 @@
   display: block;
 
   &:not(:last-of-type) {
-    // margin-bottom: var(--spacing-one);
-    height: var(--spacing-two);
+    height: var(--spacing-two-and-half);
   }
 }
 
 .list-item-container {
   display: flex;
   align-items: center;
+  height: var(--spacing-two);
 
   &.cdk-keyboard-focused {
     outline: 2px solid var(--color-primary);
@@ -20,17 +20,6 @@
 
   &.has-value {
     cursor: pointer;
-  }
-
-  &.checked {
-    .checkbox-container {
-      background: var(--color-primary);
-    }
-
-    .checkbox__short-line,
-    .checkbox__long-line {
-      opacity: 1;
-    }
   }
 }
 
@@ -48,6 +37,16 @@
   border-radius: var(--spacing-quarter);
   position: relative;
   transition: background-color var(--check-duration) ease;
+  cursor: pointer;
+
+  &.checked {
+    background: var(--color-primary);
+
+    .checkbox__short-line,
+    .checkbox__long-line {
+      opacity: 1;
+    }
+  }
 }
 
 .checkbox__short-line,
@@ -77,7 +76,7 @@
 
 .item-input {
   @include input-placeholder() {
-    color: var(--color-text-secondary);
+    color: var(--color-text-200);
   }
 
   background: transparent;
@@ -90,9 +89,10 @@
 .delete-button {
   @include button-reset();
 
+  padding: 0;
   margin-left: auto;
   background-color: transparent;
-  width: var(--spacing-one);
-  height: var(--spacing-one);
+  width: var(--spacing-two);
+  height: var(--spacing-two);
   flex: none;
 }

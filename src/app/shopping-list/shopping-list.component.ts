@@ -29,11 +29,20 @@ export class ShoppingListComponent implements OnInit {
   }
 
   changeValue(item: Item, value: string) {
+    item.value = value;
     this.service.changeItemValue(item, value);
   }
 
+  addItem(value: string): void {
+    this.service.createItem(value);
+  }
+
   removeValue(item: Item): void {
-    this.service.removeItem(item);
+    this.service.removeItems([item]);
+  }
+
+  emptyCart(): void {
+    this.service.removeItems(this.inBasket);
   }
 
   private updateList(list: Item[], changes: ItemChange[]): void {

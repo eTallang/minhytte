@@ -1,23 +1,32 @@
-<label class="list-item-container" [ngClass]="{ checked: checked, 'has-value': value }" #label>
-  <input
-    type="checkbox"
-    class="cdk-visually-hidden"
-    #checkbox
-    [checked]="checked"
-    [attr.aria-checked]="checked"
-    (change)="onInputChange($event)"
-    (click)="$event.stopPropagation()"
-  />
-  <div class="checkbox-container" *ngIf="value; else addIcon">
-    <div class="checkbox__short-line"></div>
-    <div class="checkbox__long-line"></div>
-  </div>
+<div class="list-item-container" #label>
+  <label *ngIf="!empty; else addIcon">
+    <input
+      type="checkbox"
+      class="cdk-visually-hidden"
+      #checkbox
+      [checked]="checked"
+      [attr.aria-checked]="checked"
+      (change)="onInputChange($event)"
+      (click)="$event.stopPropagation()"
+    />
+    <div class="checkbox-container" [ngClass]="{ checked: checked }">
+      <div class="checkbox__short-line"></div>
+      <div class="checkbox__long-line"></div>
+    </div>
+  </label>
   <ng-template #addIcon>
     <mh-icon theme="light" name="add" size="small" class="add-icon"></mh-icon>
   </ng-template>
-  <input class="item-input paragraph" placeholder="Legg til ny..." (focus)="onInputFocus()" (blur)="onInputBlur()" (keydown)="onInputKeydown($event)" [value]="value" #input/>
+  <input
+    class="item-input paragraph"
+    placeholder="Legg til ny..."
+    (blur)="onInputBlur()"
+    (keydown)="onInputKeydown($event)"
+    [(ngModel)]="value"
+    #input
+  />
 
-  <button class="delete-button" *ngIf="showDeleteButton" (click)="remove.emit()">
-    <mh-icon theme="light" size="small" name="close"></mh-icon>
+  <button class="delete-button" *ngIf="!empty && hasFocus" (click)="remove.emit()">
+    <mh-icon theme="light" size="medium" name="close"></mh-icon>
   </button>
-</label>
+</div>

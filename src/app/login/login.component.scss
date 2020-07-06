@@ -56,30 +56,10 @@ mh-input-container {
 }
 
 .login-button {
-  @include button-reset();
-
-  display: flex;
-  align-items: center;
-  padding: var(--spacing-one) var(--spacing-two);
-  background-color: transparent;
-  font-size: 1rem;
-  border-radius: var(--spacing-half);
   margin-top: 19vh;
 
   mh-icon {
-    margin-left: var(--spacing-one);
     transform: rotate(180deg);
-    height: var(--spacing-one-and-half);
-  }
-
-  &:hover:not(:disabled),
-  &.cdk-keyboard-focused {
-    background-color: var(--color-text-dark-100);
-  }
-
-  &:disabled {
-    cursor: default;
-    color: var(--color-text-secondary);
   }
 }
 

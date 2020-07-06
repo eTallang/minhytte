@@ -27,12 +27,6 @@ export class ShellComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscriber)
       )
       .subscribe(() => (this.previousUrl = this.router.url));
-
-    this.authService.user.subscribe(user => {
-      console.log(user?.displayName);
-      console.log(user?.phoneNumber);
-      console.log(user?.photoURL);
-    })
   }
 
   ngOnDestroy(): void {

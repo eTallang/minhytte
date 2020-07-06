@@ -1,4 +1,13 @@
-import { Component, Input, Output, EventEmitter, HostBinding, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  AfterViewInit,
+  ViewChild,
+  OnInit
+} from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
@@ -7,12 +16,13 @@ import { FocusMonitor } from '@angular/cdk/a11y';
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.scss']
 })
-export class ListItemComponent implements AfterViewInit {
+export class ListItemComponent implements OnInit, AfterViewInit {
   @ViewChild('checkbox') checkboxElement!: ElementRef<HTMLInputElement>;
   @ViewChild('label') labelElement!: ElementRef<HTMLElement>;
   @ViewChild('input') inputElement!: ElementRef<HTMLInputElement>;
 
-  showDeleteButton = false;
+  hasFocus = false;
+  oldValue = '';
 
   @Input()
   get checked(): boolean {
@@ -23,6 +33,15 @@ export class ListItemComponent implements AfterViewInit {
   }
   private _checked = false;
 
+  @Input()
+  get empty(): boolean {
+    return this._empty;
+  }
+  set empty(empty: boolean) {
+    this._empty = coerceBooleanProperty(empty);
+  }
+  private _empty = false;
+
   @Input() value = '';
 
   @Output() checkChange = new EventEmitter<boolean>();
@@ -31,8 +50,13 @@ export class ListItemComponent implements AfterViewInit {
 
   constructor(private focusMonitor: FocusMonitor) {}
 
+  ngOnInit(): void {
+    this.oldValue = this.value;
+  }
+
   ngAfterViewInit(): void {
     this.focusMonitor.monitor(this.labelElement, true).subscribe((origin) => {
+      this.hasFocus = origin !== null;
       if (origin === 'keyboard' || origin === 'program') {
         this.checkboxElement.nativeElement.focus();
       }
@@ -55,16 +79,13 @@ export class ListItemComponent implements AfterViewInit {
     }
   }
 
-  onInputFocus(): void {
-    this.showDeleteButton = true;
-  }
-
   onInputBlur(): void {
-    this.showDeleteButton = false;
-    const inputValue = this.inputElement.nativeElement.value;
-    if (this.value !== inputValue) {
-      this.value = inputValue;
+    if (this.value && this.value !== this.oldValue) {
       this.valueChange.emit(this.value);
+      this.oldValue = this.value;
+      if (this.empty) {
+        this.value = '';
+      }
     }
   }
 }

@@ -14,39 +14,19 @@ export class ShoppingListService {
   constructor(private store: AngularFirestore) {}
 
   getInBasket(): Observable<Item[]> {
-    return this.store
-      .collection<Item>(this.collectionName, (list) =>
-        list.where('inBasket', '==', true).orderBy('added', 'asc')
-      )
-      .valueChanges({ idField: 'id' })
-      .pipe(take(1)) as Observable<Item[]>;
+    return this.getItems(true);
   }
 
   getInBasketChanges(): Observable<ItemChange[]> {
-    return this.getChanges(true);
+    return this.getItemChanges(true);
   }
 
   getRemaining(): Observable<Item[]> {
-    return this.store
-      .collection<Item>(this.collectionName, (list) =>
-        list.where('inBasket', '==', false).orderBy('added', 'asc')
-      )
-      .valueChanges({ idField: 'id' })
-      .pipe(
-        map((items) => {
-          items.push({
-            id: '',
-            value: ''
-          });
-
-          return items;
-        }),
-        take(1)
-      );
+    return this.getItems(false);
   }
 
   getRemainingChanges(): Observable<ItemChange[]> {
-    return this.getChanges(false);
+    return this.getItemChanges(false);
   }
 
   toggleItem(item: Item): void {
@@ -54,23 +34,36 @@ export class ShoppingListService {
     this.store.collection(this.collectionName).doc(item.id).update({ inBasket: item.inBasket });
   }
 
-  removeItem(item: Item): void {
-    this.store.collection(this.collectionName).doc(item.id).delete();
-  }
-
   changeItemValue(item: Item, value: string): void {
-    value = value.trim();
-    if (!item.value && !item.id) {
-      this.createItem(value);
-    } else if (!item.value) {
-      this.removeItem(item);
-    } else {
-      item.value = value;
-      this.store.collection(this.collectionName).doc(item.id).update({ value: item.value });
-    }
+    item.value = value;
+    this.store.collection(this.collectionName).doc(item.id).update({ value: item.value });
   }
 
-  private getChanges(inBasket: boolean): Observable<ItemChange[]> {
+  removeItems(items: Item[]): void {
+    items.forEach(item => {
+      this.store.collection(this.collectionName).doc(item.id).delete();
+    });
+  }
+
+  createItem(value: string): void {
+    this.store.collection<Item>(this.collectionName).add({
+      added: new Date(),
+      inBasket: false,
+      removed: false,
+      value: value
+    });
+  }
+
+  private getItems(inBasket: boolean): Observable<Item[]> {
+    return this.store
+      .collection<Item>(this.collectionName, (list) =>
+        list.where('inBasket', '==', inBasket).orderBy('added', 'asc')
+      )
+      .valueChanges({ idField: 'id' })
+      .pipe(take(1));
+  }
+
+  private getItemChanges(inBasket: boolean): Observable<ItemChange[]> {
     return this.store
       .collection<Item>(this.collectionName, (list) =>
         list.where('inBasket', '==', inBasket).orderBy('added', 'asc')
@@ -89,14 +82,5 @@ export class ShoppingListService {
           });
         })
       );
-  }
-
-  private createItem(value: string): void {
-    this.store.collection<Item>(this.collectionName).add({
-      added: new Date(),
-      inBasket: false,
-      removed: false,
-      value: value
-    });
   }
 }
