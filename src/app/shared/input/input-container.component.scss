@@ -1,0 +1,32 @@
+@import 'mixins';
+
+.mh-input-container {
+  border: 2px solid var(--color-text-dark);
+  border-radius: var(--spacing-half);
+  display: inline-block;
+  height: var(--spacing-two-and-half);
+  transition: border-color 150ms ease;
+  
+  &:focus-within {
+    border-color: var(--color-secondary);
+  }
+}
+
+
+.mh-input {
+  @include input-placeholder() {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  padding: 0 var(--spacing-half);
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  max-width: 200px;
+  height: var(--spacing-two);
+  font-size: var(--spacing-one);
+  color: var(--color-text-dark);
+  outline: none;
+  width: 100%;
+  height: 100%;
+}

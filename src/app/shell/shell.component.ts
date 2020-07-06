@@ -5,6 +5,7 @@ import { MenuComponent } from './menu/menu.component';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'mh-shell',
@@ -17,7 +18,7 @@ export class ShellComponent implements OnInit, OnDestroy {
 
   menuIsOpen = false;
 
-  constructor(private overlay: Overlay, private router: Router) {}
+  constructor(private overlay: Overlay, private router: Router, private authService: AngularFireAuth) {}
 
   ngOnInit(): void {
     this.router.events
@@ -26,6 +27,12 @@ export class ShellComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscriber)
       )
       .subscribe(() => (this.previousUrl = this.router.url));
+
+    this.authService.user.subscribe(user => {
+      console.log(user?.displayName);
+      console.log(user?.phoneNumber);
+      console.log(user?.photoURL);
+    })
   }
 
   ngOnDestroy(): void {

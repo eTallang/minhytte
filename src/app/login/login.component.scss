@@ -1,7 +1,7 @@
 @import 'mixins';
 
 :host {
-  background: linear-gradient(var(--color-primary), var(--color-primary-200));
+  background: var(--color-primary-100);
   display: flex;
   height: 100vh;
   align-items: center;
@@ -9,13 +9,29 @@
   flex-direction: column;
 }
 
-h1 {
-  margin: 0 0 var(--spacing-four);
+.title-container {
+  position: relative;
+  margin-bottom: var(--spacing-four);
+}
+
+.title-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 6px solid var(--color-primary-100);
+  position: absolute;
+  top: 10px;
+  left: -6px;
+  background-color: var(--color-secondary);
+}
+
+.title {
+  margin: 0;
   padding: 0;
-  position: static;
   background-color: transparent;
   color: var(--color-text-dark);
-  font-weight: 300;
+  font-weight: 700;
+  font-size: 160px;
 }
 
 .login-form {
@@ -28,28 +44,8 @@ h1 {
   z-index: 1;
 }
 
-input {
-  @include input-placeholder() {
-    color: rgba(255, 255, 255, .5);
-  }
-
-  padding: var(--spacing-quarter) 0;
-  border-radius: 0;
-  border: none;
-  border-bottom: 2px solid var(--color-bg);
-  width: 100%;
-  background-color: transparent;
-  margin-bottom: var(--spacing-one-and-half);
-  max-width: 200px;
-  width: 100%;
-  height: var(--spacing-two);
-  font-size: var(--spacing-one);
-  color: var(--color-text-dark);
-  outline: none;
-
-  &:focus {
-    border-bottom-color: var(--color-secondary);
-  }
+mh-input-container {
+  margin-bottom: var(--spacing-two);
 }
 
 .error {
@@ -68,7 +64,7 @@ input {
   background-color: transparent;
   font-size: 1rem;
   border-radius: var(--spacing-half);
-  margin-top: 20vh;
+  margin-top: 19vh;
 
   mh-icon {
     margin-left: var(--spacing-one);
@@ -76,7 +72,8 @@ input {
     height: var(--spacing-one-and-half);
   }
 
-  &:hover:not(:disabled), &.cdk-keyboard-focused {
+  &:hover:not(:disabled),
+  &.cdk-keyboard-focused {
     background-color: var(--color-text-dark-100);
   }
 
@@ -92,11 +89,11 @@ input {
   left: 0;
   right: 0;
   overflow: hidden;
-  
+
   .wave {
     display: block;
     margin-bottom: -4px;
-    width: 140%;
+    width: 100%;
   }
 
   .wave-filler {

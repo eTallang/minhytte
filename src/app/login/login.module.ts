@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-import { IconModule } from '../shared/icon/icon.module';
+import { IconModule, InputModule } from '../shared';
 import { A11yModule } from '@angular/cdk/a11y';
 
 
@@ -15,7 +15,8 @@ import { A11yModule } from '@angular/cdk/a11y';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    IconModule
+    IconModule,
+    InputModule
   ]
 })
 export class LoginModule { }

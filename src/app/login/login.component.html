@@ -1,11 +1,18 @@
-<h1>Velkommen!</h1>
+<div class="title-container">
+  <div class="title-circle"></div>
+  <h1 class="title">H</h1>
+</div>
 <div class="wave-container">
   <img src="assets/waves.svg" alt="Waves" class="wave">
   <div class="wave-filler"></div>
 </div>
 <form [formGroup]="fg" (submit)="signIn()" class="login-form">
-  <input placeholder="E-post" type="email" required formControlName="email" />
-  <input placeholder="Passord" type="password" required formControlName="password" />
+  <mh-input-container>
+    <input mhInput type="email" placeholder="E-post" required formControlName="email" />
+  </mh-input-container>
+  <mh-input-container>
+    <input mhInput type="password" placeholder="Password" required formControlName="password" />
+  </mh-input-container>
   <span class="error">{{error}}</span>
   <button class="paragraph login-button" cdkMonitorElementFocus [disabled]="fg.invalid || signingIn">
     Logg inn
