@@ -1,37 +1,31 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { MenuComponent } from './menu/menu.component';
-import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { fromEvent, Observable } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+
+import { MenuComponent } from './menu/menu.component';
 
 @Component({
   selector: 'mh-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss']
 })
-export class ShellComponent implements OnInit, OnDestroy {
-  private unsubscriber = new Subject<void>();
-  private previousUrl = '';
-
+export class ShellComponent implements OnInit {
   menuIsOpen = false;
+  isScrolled = false;
+  username: Observable<string> | undefined;
+  photoUrl: Observable<string | null> | undefined;
+  initials: Observable<string> | undefined;
 
-  constructor(private overlay: Overlay, private router: Router, private authService: AngularFireAuth) {}
+  constructor(private overlay: Overlay, private auth: AngularFireAuth) {}
 
   ngOnInit(): void {
-    this.router.events
-      .pipe(
-        filter((e) => e instanceof NavigationStart),
-        takeUntil(this.unsubscriber)
-      )
-      .subscribe(() => (this.previousUrl = this.router.url));
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscriber.next();
-    this.unsubscriber.complete();
+    this.listenForScroll();
+    this.username = this.getUsername();
+    this.photoUrl = this.getPhotoUrl();
+    this.initials = this.getUserInitials();
   }
 
   openMenu(): void {
@@ -51,7 +45,36 @@ export class ShellComponent implements OnInit, OnDestroy {
     });
   }
 
-  navigateBack(): void {
-    this.router.navigateByUrl(this.previousUrl);
+  private getUsername(): Observable<string> {
+    return this.auth.user.pipe(
+      map((user) => {
+        const name = user?.displayName || user?.email?.split('@')[0];
+        return name!;
+      })
+    );
+  }
+
+  private getPhotoUrl(): Observable<string | null> {
+    return this.auth.user.pipe(
+      map((user) => {
+        return user!.photoURL;
+      })
+    );
+  }
+
+  private getUserInitials(): Observable<string> {
+    return this.getUsername().pipe(
+      map((name) => {
+        return name![0].toUpperCase();
+      })
+    );
+  }
+
+  private listenForScroll() {
+    fromEvent(window, 'scroll')
+      .pipe(debounceTime(10))
+      .subscribe(() => {
+        this.isScrolled = window.scrollY > 0;
+      });
   }
 }

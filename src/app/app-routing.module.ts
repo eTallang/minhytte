@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { ShellComponent } from './shell/shell.component';
 import { AuthGuard } from './core/auth.guard';
 
@@ -7,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: ShellComponent,
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
@@ -21,8 +22,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule)
+  },
+  {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./login/login.module').then((m) => m.LoginModule)
   }
 ];
 

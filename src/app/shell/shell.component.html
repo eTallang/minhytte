@@ -1,13 +1,15 @@
-<div class="header">
-  <a (click)="navigateBack()">
-    <mh-icon theme="light" size="medium" class="back-icon" name="chevron-back"></mh-icon>
+<div class="header" [ngClass]="{ shadow: isScrolled }">
+  <a class="profile-link" routerLink="profile">
+    {{ username | async }}
+    <div class="user-circle">
+      {{ initials | async }}
+      <img *ngIf="photoUrl | async" [src]="photoUrl | async" alt="Profile photo" />
+    </div>
   </a>
-  <p class="user-name">Erik</p>
 </div>
 <div class="router-container" [ngClass]="{ faded: menuIsOpen }">
   <router-outlet></router-outlet>
 </div>
-<!-- <div class="backdrop" [ngClass]="{'faded': menuIsOpen}"></div> -->
 <button class="fab" (click)="openMenu()">
   <mh-icon name="menu"></mh-icon>
 </button>
