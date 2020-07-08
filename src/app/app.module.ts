@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { ShellModule } from './shell/shell.module';
 import { IconModule } from './shared/icon/icon.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,8 @@ import { IconModule } from './shared/icon/icon.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     ShellModule,
-    IconModule
+    IconModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   bootstrap: [AppComponent]
 })

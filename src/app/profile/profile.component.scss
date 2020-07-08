@@ -1,0 +1,19 @@
+.wave-container {
+  position: absolute;
+  top: 15vh;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+
+  img {
+    width: 100%;
+    margin-bottom: -4px;
+  }
+
+  .wave-filler {
+    flex: 1;
+    background-color: var(--color-bg-alt);
+  }
+}
