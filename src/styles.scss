@@ -16,7 +16,20 @@ body {
 }
 
 * {
-  font-family: "Quicksand", sans-serif;
-  color: var(--color-text-primary);
   box-sizing: border-box;
+}
+
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+a,
+input,
+textarea,
+button,
+a {
+  font-family: 'Quicksand', sans-serif;
+  color: var(--color-text-primary);
 }

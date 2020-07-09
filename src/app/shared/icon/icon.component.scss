@@ -1,5 +1,10 @@
+mh-icon {
+  color: var(--color-text-dark-100);
+}
+
 .icon {
   fill: none;
+  stroke: currentColor;
 
   &.small {
     width: var(--spacing-one);
@@ -14,13 +19,5 @@
   &.large {
     width: var(--spacing-two);
     height: var(--spacing-two);
-  }
-
-  &.dark {
-    stroke: var(--color-text-dark-100);
-  }
-
-  &.light {
-    stroke: var(--color-primary);
   }
 }

@@ -49,12 +49,6 @@ h1 {
   color: var(--color-text-dark);
   text-decoration: none;
 
-  ion-icon {
-    margin-bottom: var(--spacing-quarter);
-    color: white;
-    --ionicon-stroke-width: 1px;
-  }
-
   &:not(.active) {
     &:focus,
     &:hover {
@@ -64,5 +58,9 @@ h1 {
 
   &.active {
     background-color: var(--color-secondary);
+
+    mh-icon {
+      color: var(--color-text-dark);
+    }
   }
 }

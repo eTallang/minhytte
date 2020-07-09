@@ -15,7 +15,7 @@
     </div>
   </label>
   <ng-template #addIcon>
-    <mh-icon theme="light" name="add" size="small" class="add-icon"></mh-icon>
+    <mh-icon name="add" size="small" class="add-icon"></mh-icon>
   </ng-template>
   <input
     class="item-input paragraph"
@@ -27,6 +27,6 @@
   />
 
   <button class="delete-button" *ngIf="!empty && hasFocus" (click)="remove.emit()">
-    <mh-icon theme="light" size="medium" name="close"></mh-icon>
+    <mh-icon size="medium" name="close"></mh-icon>
   </button>
 </div>

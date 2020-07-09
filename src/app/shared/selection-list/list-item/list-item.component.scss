@@ -21,6 +21,10 @@
   &.has-value {
     cursor: pointer;
   }
+
+  mh-icon {
+    color: var(--color-primary);
+  }
 }
 
 .checkbox-container,

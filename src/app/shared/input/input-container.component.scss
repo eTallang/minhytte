@@ -4,9 +4,10 @@
   border: 2px solid var(--color-text-dark);
   border-radius: var(--spacing-half);
   display: inline-block;
-  height: var(--spacing-two-and-half);
+  height: var(--spacing-three);
   transition: border-color 150ms ease;
-  
+  width: 100%;
+
   &:focus-within {
     border-color: var(--color-secondary);
   }
@@ -16,8 +17,10 @@
 .mh-input {
   @include input-placeholder() {
     color: rgba(255, 255, 255, 0.6);
+    letter-spacing: .5px;
   }
-
+  
+  letter-spacing: .5px;
   padding: 0 var(--spacing-half);
   border-radius: 0;
   border: none;

@@ -1,21 +1,21 @@
-<div class="title-container">
-  <div class="title-circle"></div>
-  <h1 class="title">H</h1>
-</div>
-<div class="wave-container">
-  <img src="assets/waves.svg" alt="Waves" class="wave">
-  <div class="wave-filler"></div>
-</div>
 <form [formGroup]="fg" (submit)="signIn()" class="login-form">
+  <img src="assets/icons/icon-192x192.png" class="logo" alt="Logo">
   <mh-input-container>
     <input mhInput type="email" placeholder="E-post" required formControlName="email" />
   </mh-input-container>
   <mh-input-container>
     <input mhInput type="password" placeholder="Password" required formControlName="password" />
   </mh-input-container>
-  <span class="error">{{error}}</span>
-  <button class="paragraph mh-button login-button" cdkMonitorElementFocus [disabled]="fg.invalid || signingIn">
-    Logg inn
-    <mh-icon theme="light" name="chevron-back" size="medium"></mh-icon>
-  </button>
+  <span class="error">{{ error }}</span>
+  <img src="assets/waves.svg" alt="Waves" class="wave" />
+  <div class="submit-container">
+    <button
+      class="mh-button login-button"
+      cdkMonitorElementFocus
+      [disabled]="fg.invalid || signingIn"
+    >
+      Logg inn
+      <mh-icon name="chevron-back" size="medium"></mh-icon>
+    </button>
+  </div>
 </form>
