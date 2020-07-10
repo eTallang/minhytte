@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { takeUntil, debounceTime } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'mh-profile',
@@ -13,9 +13,10 @@ import { takeUntil, debounceTime } from 'rxjs/operators';
 export class ProfileComponent implements OnInit, OnDestroy {
   private unsubscriber = new Subject<void>();
   private user: firebase.User | null | undefined;
-  photoUrl: string | null | undefined;
   displayName = new FormControl();
+  oldDisplayName: string | null | undefined;
   email = new FormControl();
+  oldEmail: string | null | undefined;
   password = new FormControl('', Validators.required);
   passwordInputType: 'password' | 'text' = 'password';
 
@@ -24,14 +25,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.auth.user.pipe(takeUntil(this.unsubscriber)).subscribe((user) => {
       this.user = user;
-      this.photoUrl = user?.photoURL;
-      console.log(user?.displayName);
       this.displayName.setValue(user?.displayName);
       this.email.setValue(user?.email);
     });
-
-    this.listenForValueChanges('displayName');
-    this.listenForValueChanges('email');
   }
 
   ngOnDestroy(): void {
@@ -51,23 +47,37 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.user?.updatePassword(this.password.value);
   }
 
+  updateEmail(): void {
+    if (this.oldEmail !== this.email.value) {
+      this.oldEmail = this.email.value;
+      this.user?.updateEmail(this.email.value);
+    }
+  }
+
+  updateDisplayName(): void {
+    if (this.oldDisplayName !== this.displayName.value) {
+      this.oldDisplayName = this.displayName.value;
+      this.user?.updateProfile({
+        displayName: this.displayName.value
+      });
+    }
+  }
+
+  onInputKeydown(event: KeyboardEvent, input: HTMLInputElement, type: 'displayName' | 'email'): void {
+    if (event.key === 'Enter') {
+      input.blur();
+
+      if (type === 'displayName') {
+        this.updateDisplayName();
+      } else if (type === 'email') {
+        this.updateEmail();
+      }
+    }
+  }
+
   signOut(): void {
     this.auth.signOut().then(() => {
       this.router.navigate(['login']);
     });
-  }
-
-  private listenForValueChanges(propName: 'displayName' | 'email') {
-    this[propName].valueChanges
-      .pipe(debounceTime(400), takeUntil(this.unsubscriber))
-      .subscribe((updatedValue) => {
-        if (propName === 'displayName') {
-          this.user?.updateProfile({
-            displayName: updatedValue
-          });
-        } else {
-          this.user?.updateEmail(updatedValue);
-        }
-      });
   }
 }

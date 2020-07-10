@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { Item, ItemChange } from './item';
 import { ShoppingListService } from './shopping-list.service';
@@ -10,18 +12,36 @@ import { listAnimation } from '../core/animations';
   styleUrls: ['./shopping-list.component.scss'],
   animations: [listAnimation]
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
+  private unsubscriber = new Subject<void>();
   remaining: Item[] = [];
   inBasket: Item[] = [];
 
   constructor(private service: ShoppingListService) {}
 
   ngOnInit(): void {
-    this.service.getRemaining().subscribe((remaining) => (this.remaining = remaining));
-    this.service.getRemainingChanges().subscribe((changes) => this.updateList(this.remaining, changes));
+    this.service
+      .getRemaining()
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe((remaining) => (this.remaining = remaining));
+    this.service
+      .getRemainingChanges()
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe((changes) => this.updateList(this.remaining, changes));
 
-    this.service.getInBasket().subscribe((inBasket) => (this.inBasket = inBasket));
-    this.service.getInBasketChanges().subscribe((changes) => this.updateList(this.inBasket, changes));
+    this.service
+      .getInBasket()
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe((inBasket) => (this.inBasket = inBasket));
+    this.service
+      .getInBasketChanges()
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe((changes) => this.updateList(this.inBasket, changes));
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscriber.next();
+    this.unsubscriber.complete();
   }
 
   toggleItem(item: Item): void {

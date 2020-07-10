@@ -2,24 +2,40 @@
   <mh-icon class="icon-before" size="medium" name="chevron-back"></mh-icon>
   Tilbake
 </a>
-<input class="cdk-visually-hidden" type="file" #fileInput />
-<button class="picture-button" (click)="fileInput.click()">
-  <div class="upload-icon">
-    <mh-icon name="pencil"></mh-icon>
-  </div>
-  <img [src]="photoUrl" alt="Profile picture" *ngIf="photoUrl" />
-</button>
+<div class="sun-decoration"></div>
 
 <div class="wave-container">
   <img class="wave" src="assets/waves-2.svg" alt="Waves" />
 </div>
 
 <div class="content-container">
-  <input placeholder="Ditt navn" autocomplete="name" class="heading-1 title-input" [formControl]="displayName" />
-  <input placeholder="Din e-post" autocomplete="email" class="paragraph title-input" [formControl]="email" />
-  
+  <input
+    #nameInput
+    placeholder="Ditt navn"
+    autocomplete="name"
+    class="heading-1 title-input"
+    [formControl]="displayName"
+    (blur)="updateDisplayName()"
+    (keydown)="onInputKeydown($event, nameInput, 'displayName')"
+  />
+  <input
+    #emailInput
+    placeholder="Din e-post"
+    autocomplete="email"
+    class="paragraph title-input"
+    [formControl]="email"
+    (blur)="updateEmail()"
+    (keydown)="onInputKeydown($event, emailInput, 'email')"
+  />
+
   <mh-input-container class="password-form" theme="light">
-    <input autocomplete="new-password" mhInput placeholder="Nytt passord" [type]="passwordInputType" [formControl]="password">
+    <input
+      autocomplete="new-password"
+      mhInput
+      placeholder="Nytt passord"
+      [type]="passwordInputType"
+      [formControl]="password"
+    />
     <button class="input-type-toggle" (click)="togglePasswordInputType()">
       <mh-icon size="medium" [name]="passwordInputType === 'text' ? 'eye-off' : 'eye'"></mh-icon>
     </button>
