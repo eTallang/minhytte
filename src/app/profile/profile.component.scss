@@ -9,6 +9,7 @@
 .back-button {
   align-self: flex-start;
   margin: var(--spacing-one) var(--spacing-half) 0;
+  padding: var(--spacing-one);
 }
 
 .picture-button {
@@ -24,7 +25,7 @@
   margin: -64px auto 0;
   flex: none;
 
-  &:hover .upload-icon{
+  &:hover .upload-icon {
     opacity: 1;
   }
 }
@@ -36,7 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, .4);
+  background-color: rgba(255, 255, 255, 0.4);
   transition: opacity 300ms ease;
 
   mh-icon {
@@ -51,7 +52,7 @@
   max-height: 300px;
   margin-bottom: -4px;
   flex: none;
-  
+
   .wave {
     width: 100%;
   }
@@ -84,14 +85,7 @@
 
 .password-form {
   margin-top: var(--spacing-three);
-
-  input {
-    @include input-placeholder() {
-      color: var(--color-primary-200);
-    }
-
-    color: var(--text-primary-100);
-  }
+  min-width: 300px;
 
   .input-type-toggle {
     @include button-reset();

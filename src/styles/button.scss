@@ -33,13 +33,15 @@
   text-decoration: none;
 
   mh-icon {
-    margin-left: var(--spacing-one);
     height: var(--spacing-one-and-half);
     color: var(--color-secondary-100);
 
     &.icon-before {
-      margin-left: 0;
       margin-right: var(--spacing-one);
+    }
+
+    .icon-after {
+      margin-left: var(--spacing-one);
     }
   }
 
@@ -51,7 +53,7 @@
   &:disabled {
     cursor: default;
     color: var(--color-text-200);
-    
+
     mh-icon {
       color: var(--color-text-200);
     }

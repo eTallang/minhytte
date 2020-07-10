@@ -7,5 +7,5 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class InputContainerComponent {
-  @Input() label = '';
+  @Input() theme: 'light' | 'dark' = 'dark';
 }

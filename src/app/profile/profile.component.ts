@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'mh-profile',
@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private listenForValueChanges(propName: 'displayName' | 'email') {
     this[propName].valueChanges
-      .pipe(debounceTime(500), takeUntil(this.unsubscriber))
+      .pipe(debounceTime(400), takeUntil(this.unsubscriber))
       .subscribe((updatedValue) => {
         if (propName === 'displayName') {
           this.user?.updateProfile({

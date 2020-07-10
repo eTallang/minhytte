@@ -1,5 +1,5 @@
 <a class="mh-button back-button" routerLink="/">
-  <mh-icon size="medium" name="chevron-back" class="icon-before"></mh-icon>
+  <mh-icon class="icon-before" size="medium" name="chevron-back"></mh-icon>
   Tilbake
 </a>
 <input class="cdk-visually-hidden" type="file" #fileInput />
@@ -15,11 +15,11 @@
 </div>
 
 <div class="content-container">
-  <input placeholder="Ditt navn" class="heading-1 title-input" [formControl]="displayName" />
-  <input placeholder="Din e-post" class="paragraph title-input" [formControl]="email" />
+  <input placeholder="Ditt navn" autocomplete="name" class="heading-1 title-input" [formControl]="displayName" />
+  <input placeholder="Din e-post" autocomplete="email" class="paragraph title-input" [formControl]="email" />
   
-  <mh-input-container class="password-form">
-    <input mhInput placeholder="Nytt passord" [type]="passwordInputType" [formControl]="password">
+  <mh-input-container class="password-form" theme="light">
+    <input autocomplete="new-password" mhInput placeholder="Nytt passord" [type]="passwordInputType" [formControl]="password">
     <button class="input-type-toggle" (click)="togglePasswordInputType()">
       <mh-icon size="medium" [name]="passwordInputType === 'text' ? 'eye-off' : 'eye'"></mh-icon>
     </button>
