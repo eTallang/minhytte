@@ -1,19 +1,107 @@
-.wave-container {
-  position: absolute;
-  top: 15vh;
-  left: 0;
-  right: 0;
+@import 'mixins';
+
+:host {
   display: flex;
   flex-direction: column;
-  bottom: 0;
+  height: 100vh;
+}
 
-  img {
+.back-button {
+  align-self: flex-start;
+  margin: var(--spacing-one) var(--spacing-half) 0;
+}
+
+.picture-button {
+  @include button-reset();
+
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  transform: translateY(60%);
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--color-secondary);
+  margin: -64px auto 0;
+  flex: none;
+
+  &:hover .upload-icon{
+    opacity: 1;
+  }
+}
+
+.upload-icon {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, .4);
+  transition: opacity 300ms ease;
+
+  mh-icon {
+    color: var(--color-primary-200);
+    width: var(--spacing-three);
+    height: var(--spacing-three);
+  }
+}
+
+.wave-container {
+  overflow: hidden;
+  max-height: 300px;
+  margin-bottom: -4px;
+  flex: none;
+  
+  .wave {
     width: 100%;
-    margin-bottom: -4px;
+  }
+}
+
+.content-container {
+  flex: 1;
+  margin-top: -80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-bg-alt);
+  padding-bottom: var(--spacing-three);
+}
+
+.title-input {
+  @include input-placeholder() {
+    color: var(--color-primary-200);
   }
 
-  .wave-filler {
-    flex: 1;
-    background-color: var(--color-bg-alt);
+  outline: none;
+  color: var(--color-primary);
+  background: transparent;
+  padding: 0;
+  border: none;
+  margin: 0 var(--spacing-one) var(--spacing-half);
+  text-align: center;
+  width: 100%;
+}
+
+.password-form {
+  margin-top: var(--spacing-three);
+
+  input {
+    @include input-placeholder() {
+      color: var(--color-primary-200);
+    }
+
+    color: var(--text-primary-100);
   }
+
+  .input-type-toggle {
+    @include button-reset();
+
+    mh-icon {
+      color: var(--color-primary-200);
+    }
+  }
+}
+
+.sign-out-button {
+  margin-top: auto;
 }

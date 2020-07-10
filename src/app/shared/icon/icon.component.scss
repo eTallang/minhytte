@@ -1,23 +1,26 @@
 mh-icon {
   color: var(--color-text-dark-100);
+  display: inline-block;
+}
+
+.mh-icon-small {
+  width: var(--spacing-one);
+  height: var(--spacing-one);
+}
+
+.mh-icon-medium {
+  width: var(--spacing-one-and-half);
+  height: var(--spacing-one-and-half);
+}
+
+.mh-icon-large {
+  width: var(--spacing-two);
+  height: var(--spacing-two);
 }
 
 .icon {
   fill: none;
   stroke: currentColor;
-
-  &.small {
-    width: var(--spacing-one);
-    height: var(--spacing-one);
-  }
-
-  &.medium {
-    width: var(--spacing-one-and-half);
-    height: var(--spacing-one-and-half);
-  }
-
-  &.large {
-    width: var(--spacing-two);
-    height: var(--spacing-two);
-  }
+  width: inherit;
+  height: inherit;
 }

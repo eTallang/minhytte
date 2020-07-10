@@ -30,11 +30,17 @@
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--color-secondary-100);
+  text-decoration: none;
 
   mh-icon {
     margin-left: var(--spacing-one);
     height: var(--spacing-one-and-half);
     color: var(--color-secondary-100);
+
+    &.icon-before {
+      margin-left: 0;
+      margin-right: var(--spacing-one);
+    }
   }
 
   &:hover:not(:disabled),

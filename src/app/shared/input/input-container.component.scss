@@ -3,9 +3,11 @@
 .mh-input-container {
   border: 2px solid var(--color-text-dark);
   border-radius: var(--spacing-half);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   height: var(--spacing-three);
   transition: border-color 150ms ease;
+  padding: 0 var(--spacing-half);
   width: 100%;
 
   &:focus-within {
@@ -21,9 +23,9 @@
   }
   
   letter-spacing: .5px;
-  padding: 0 var(--spacing-half);
   border-radius: 0;
   border: none;
+  padding: 0;
   background-color: transparent;
   max-width: 200px;
   height: var(--spacing-two);

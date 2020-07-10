@@ -1,8 +1,34 @@
-<button>
-  
+<a class="mh-button back-button" routerLink="/">
+  <mh-icon size="medium" name="chevron-back" class="icon-before"></mh-icon>
+  Tilbake
+</a>
+<input class="cdk-visually-hidden" type="file" #fileInput />
+<button class="picture-button" (click)="fileInput.click()">
+  <div class="upload-icon">
+    <mh-icon name="pencil"></mh-icon>
+  </div>
+  <img [src]="photoUrl" alt="Profile picture" *ngIf="photoUrl" />
 </button>
 
 <div class="wave-container">
-  <img src="assets/waves-2.svg" alt="Waves">
-  <div class="wave-filler"></div>
+  <img class="wave" src="assets/waves-2.svg" alt="Waves" />
+</div>
+
+<div class="content-container">
+  <input placeholder="Ditt navn" class="heading-1 title-input" [formControl]="displayName" />
+  <input placeholder="Din e-post" class="paragraph title-input" [formControl]="email" />
+  
+  <mh-input-container class="password-form">
+    <input mhInput placeholder="Nytt passord" [type]="passwordInputType" [formControl]="password">
+    <button class="input-type-toggle" (click)="togglePasswordInputType()">
+      <mh-icon size="medium" [name]="passwordInputType === 'text' ? 'eye-off' : 'eye'"></mh-icon>
+    </button>
+  </mh-input-container>
+  <button class="mh-button" [disabled]="password.invalid" (click)="updatePassword()">
+    Bytt
+  </button>
+
+  <button class="sign-out-button mh-button" (click)="signOut()">
+    Logg ut
+  </button>
 </div>
