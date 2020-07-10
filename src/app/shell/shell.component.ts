@@ -15,7 +15,6 @@ import { MenuComponent } from './menu/menu.component';
 export class ShellComponent implements OnInit {
   menuIsOpen = false;
   isScrolled = false;
-  username: Observable<string> | undefined;
   photoUrl: Observable<string | null> | undefined;
   initials: Observable<string> | undefined;
 
@@ -23,7 +22,6 @@ export class ShellComponent implements OnInit {
 
   ngOnInit(): void {
     this.listenForScroll();
-    this.username = this.getUsername();
     this.photoUrl = this.getPhotoUrl();
     this.initials = this.getUserInitials();
   }
@@ -45,15 +43,6 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  private getUsername(): Observable<string> {
-    return this.auth.user.pipe(
-      map((user) => {
-        const name = user?.displayName || user?.email?.split('@')[0];
-        return name!;
-      })
-    );
-  }
-
   private getPhotoUrl(): Observable<string | null> {
     return this.auth.user.pipe(
       map((user) => {
@@ -63,8 +52,9 @@ export class ShellComponent implements OnInit {
   }
 
   private getUserInitials(): Observable<string> {
-    return this.getUsername().pipe(
-      map((name) => {
+    return this.auth.user.pipe(
+      map((user) => {
+        const name = user?.displayName || user?.email?.split('@')[0];
         return name![0].toUpperCase();
       })
     );

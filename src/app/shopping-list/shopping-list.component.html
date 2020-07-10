@@ -4,8 +4,10 @@
   <mh-list-item empty (valueChange)="addItem($event)"></mh-list-item>
 </mh-selection-list>
 <hr class="separator" />
-<h2>I handlekurven</h2>
-<button class="mh-button" (click)="emptyCart()">Tøm</button>
+<div class="title-container">
+  <h2>I handlekurven</h2>
+  <button class="mh-button" (click)="emptyCart()">Tøm</button>
+</div>
 <p *ngIf="!inBasket.length; else basketList">Ingen varer i handlekurven...</p>
 <ng-template #basketList>
   <mh-selection-list [@listAnimation]="inBasket.length">

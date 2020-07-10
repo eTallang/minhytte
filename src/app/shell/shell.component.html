@@ -1,6 +1,6 @@
 <div class="header" [ngClass]="{ shadow: isScrolled }">
   <a class="profile-link" routerLink="profile">
-    {{ username | async }}
+    Profil
     <div class="user-circle">
       {{ initials | async }}
       <img *ngIf="photoUrl | async" [src]="photoUrl | async" alt="Profile photo" />

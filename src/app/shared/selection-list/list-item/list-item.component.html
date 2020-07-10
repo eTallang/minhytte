@@ -15,7 +15,7 @@
     </div>
   </label>
   <ng-template #addIcon>
-    <mh-icon name="add" size="small" class="add-icon"></mh-icon>
+    <mh-icon (click)="input.focus()" name="add" size="small" class="add-icon"></mh-icon>
   </ng-template>
   <input
     class="item-input paragraph"

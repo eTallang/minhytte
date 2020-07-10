@@ -5,15 +5,13 @@ h1,
   font-weight: 700;
   margin-bottom: 3rem;
   letter-spacing: 0.5px;
-  text-align: center;
   padding-bottom: var(--spacing-two);
   background-color: var(--color-bg);
-  margin: calc(var(--spacing-one) * 4) calc(var(--spacing-two) * -1) var(--spacing-one);
+  margin: var(--spacing-four) 0 var(--spacing-one);
 }
 
 h2,
 .heading-2 {
-  text-align: center;
   font-size: 2rem;
   line-height: 1;
   letter-spacing: 0;
