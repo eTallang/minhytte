@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { DragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'mh-list-item',
@@ -48,7 +49,11 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   @Output() valueChange = new EventEmitter<string>();
   @Output() remove = new EventEmitter<void>();
 
-  constructor(private focusMonitor: FocusMonitor) {}
+  constructor(
+    private focusMonitor: FocusMonitor,
+    private dragDrop: DragDrop,
+    private elementRef: ElementRef<HTMLElement>
+  ) {}
 
   ngOnInit(): void {
     this.oldValue = this.value;
@@ -56,11 +61,14 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.focusMonitor.monitor(this.labelElement, true).subscribe((origin) => {
-      this.hasFocus = origin !== null;
       if (origin === 'keyboard' || origin === 'program') {
         this.checkboxElement.nativeElement.focus();
       }
     });
+
+    if (!this.empty) {
+      this.createDrag();
+    }
   }
 
   toggle(): void {
@@ -87,5 +95,16 @@ export class ListItemComponent implements OnInit, AfterViewInit {
         this.value = '';
       }
     }
+  }
+
+  private createDrag() {
+    const dragItem = this.dragDrop.createDrag(this.labelElement.nativeElement);
+    dragItem.dropped.subscribe((e) => {
+      if (e.distance.x < -50) {
+        this.hasFocus = !this.hasFocus;
+      }
+    });
+    const dropList = this.dragDrop.createDropList(this.elementRef.nativeElement).withItems([dragItem]);
+    dropList.lockAxis = 'x';
   }
 }
