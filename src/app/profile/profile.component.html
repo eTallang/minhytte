@@ -12,6 +12,7 @@
   <input
     #nameInput
     placeholder="Ditt navn"
+    spellcheck="false"
     autocomplete="name"
     class="heading-1 title-input"
     [formControl]="displayName"
@@ -21,6 +22,8 @@
   <input
     #emailInput
     placeholder="Din e-post"
+    spellcheck="false"
+    type="email"
     autocomplete="email"
     class="paragraph title-input"
     [formControl]="email"
