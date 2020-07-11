@@ -3,10 +3,8 @@
 :host {
   --check-duration: 150ms;
   display: block;
-
-  &:not(:last-of-type) {
-    height: var(--spacing-two-and-half);
-  }
+  height: var(--spacing-two-and-half);
+  overflow: hidden;
 }
 
 .list-item-container {
