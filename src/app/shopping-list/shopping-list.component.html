@@ -3,7 +3,7 @@
   <mh-list-item *ngFor="let item of remaining" [value]="item.value" [checked]="item.inBasket" (remove)="removeValue(item)" (checkChange)="toggleItem(item)" (valueChange)="changeValue(item, $event)"></mh-list-item>
   <mh-list-item empty (valueChange)="addItem($event)"></mh-list-item>
 </mh-selection-list>
-<hr class="separator" />
+<mh-separator></mh-separator>
 <div class="title-container">
   <h2>I handlekurven</h2>
   <button class="mh-button" (click)="emptyCart()">Tøm</button>

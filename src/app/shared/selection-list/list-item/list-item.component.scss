@@ -24,6 +24,10 @@
     opacity: 0;
   }
 
+  &.indented {
+    transform: translate3d(-20px, 0, 0);
+  }
+
   mh-icon {
     color: var(--color-primary);
   }

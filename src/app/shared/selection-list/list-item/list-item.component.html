@@ -1,4 +1,4 @@
-<div class="list-item-container" #label>
+<div class="list-item-container" #label [ngClass]="{'indented': hasFocus}">
   <label *ngIf="!empty; else addIcon">
     <input
       type="checkbox"

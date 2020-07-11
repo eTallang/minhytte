@@ -18,6 +18,10 @@ const routes: Routes = [
       {
         path: 'shopping-list',
         loadChildren: () => import('./shopping-list/shopping-list.module').then((m) => m.ShoppingListModule)
+      },
+      {
+        path: 'plans',
+        loadChildren: () => import('./plans/plans.module').then((m) => m.PlansModule)
       }
     ]
   },
@@ -33,10 +37,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules,
-    onSameUrlNavigation: 'reload'
-  })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+      onSameUrlNavigation: 'reload'
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

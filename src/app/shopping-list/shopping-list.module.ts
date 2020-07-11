@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ShoppingListRoutingModule } from './shopping-list-routing.module';
 import { ShoppingListComponent } from './shopping-list.component';
 import { SelectionListModule } from '../shared/selection-list/selection-list.module';
+import { SeparatorModule } from '../shared';
 
 @NgModule({
   declarations: [ShoppingListComponent],
@@ -12,7 +13,8 @@ import { SelectionListModule } from '../shared/selection-list/selection-list.mod
     CommonModule,
     ShoppingListRoutingModule,
     AngularFirestoreModule,
-    SelectionListModule
+    SelectionListModule,
+    SeparatorModule
   ]
 })
 export class ShoppingListModule {}

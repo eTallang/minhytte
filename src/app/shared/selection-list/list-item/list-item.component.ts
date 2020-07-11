@@ -88,7 +88,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   }
 
   onInputBlur(): void {
-    if (this.value && this.value !== this.oldValue) {
+    if (this.value !== this.oldValue) {
       this.valueChange.emit(this.value);
       this.oldValue = this.value;
       if (this.empty) {
@@ -101,7 +101,9 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     const dragItem = this.dragDrop.createDrag(this.labelElement.nativeElement);
     dragItem.dropped.subscribe((e) => {
       if (e.distance.x < -50) {
-        this.hasFocus = !this.hasFocus;
+        this.hasFocus = true;
+      } else {
+        this.hasFocus = false;
       }
     });
     const dropList = this.dragDrop.createDropList(this.elementRef.nativeElement).withItems([dragItem]);

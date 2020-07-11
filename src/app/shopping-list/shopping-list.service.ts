@@ -30,17 +30,19 @@ export class ShoppingListService {
   }
 
   toggleItem(item: Item): void {
-    item.inBasket = !item.inBasket;
-    this.store.collection(this.collectionName).doc(item.id).update({ inBasket: item.inBasket });
+    this.store.collection(this.collectionName).doc(item.id).update({ inBasket: !item.inBasket });
   }
 
   changeItemValue(item: Item, value: string): void {
-    item.value = value;
-    this.store.collection(this.collectionName).doc(item.id).update({ value: item.value });
+    if (!value) {
+      this.removeItems([item]);
+    } else {
+      this.store.collection(this.collectionName).doc(item.id).update({ value: item.value });
+    }
   }
 
   removeItems(items: Item[]): void {
-    items.forEach(item => {
+    items.forEach((item) => {
       this.store.collection(this.collectionName).doc(item.id).delete();
     });
   }
