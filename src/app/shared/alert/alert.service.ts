@@ -50,7 +50,8 @@ export class AlertService {
 
     return this.overlay.create({
       scrollStrategy: this.overlay.scrollStrategies.noop(),
-      positionStrategy: positionStrategy
+      positionStrategy: positionStrategy,
+      width: '100%'
     });
   }
 
@@ -58,5 +59,5 @@ export class AlertService {
     const container = new ComponentPortal(AlertComponent, null, injector);
     const containerRef = overlayRef.attach<AlertComponent>(container);
     return containerRef.instance;
-  }
+  } 
 }

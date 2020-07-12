@@ -6,6 +6,7 @@ import { fromEvent, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 
 import { MenuComponent } from './menu/menu.component';
+import { SwService } from './sw.service'
 
 @Component({
   selector: 'mh-shell',
@@ -18,7 +19,7 @@ export class ShellComponent implements OnInit {
   photoUrl: Observable<string | null> | undefined;
   initials: Observable<string> | undefined;
 
-  constructor(private overlay: Overlay, private auth: AngularFireAuth) {}
+  constructor(private overlay: Overlay, private auth: AngularFireAuth, private swService: SwService) {}
 
   ngOnInit(): void {
     this.listenForScroll();

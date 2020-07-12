@@ -1,20 +1,39 @@
 @import 'mixins';
 
-.ix3-alert {
+.mh-alert {
   background-color: var(--color-bg);
   padding: var(--spacing-two);
-  border-top: var(--spacing-quarter) solid var(--color-primary);
+  border-top: var(--spacing-quarter) solid var(--color-primary-200);
+  border-radius: 16px 16px 0 0;
   width: 100%;
-  box-shadow: 0 16px 16px 0 rgba(39, 105, 201, 0.08);
+  box-shadow: 0 -16px 16px 0 rgba(32, 59, 140, 0.08);
 }
 
-.ix3-alert__title-container {
+.mh-alert__title-container {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
 
+.mh-alert__title {
+  margin: 0;
+  padding: 0;
+  font-size: var(--spacing-two);
+}
+
 .mh-alert__close-button {
   @include button-reset();
   background-color: transparent;
+
+  mh-icon {
+    color: var(--color-primary-200);
+  }
+}
+
+.mh-alert__description {
+  margin: var(--spacing-two) 0 var(--spacing-one);
+}
+
+.mh-alert__accept-button {
+  margin: 0 0 calc(var(--spacing-one) * -1) calc(var(--spacing-two) * -1);
 }

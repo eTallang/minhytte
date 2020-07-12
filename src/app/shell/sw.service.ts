@@ -11,7 +11,7 @@ export class SwService {
     this.swUpdate.available.subscribe((d) => {
       if (d.current !== d.available) {
         this.alertService
-          .open('Nyhet', 'En ny oppdatering av appen er tilgjengelig.', {
+          .open('Hei du!', 'En ny oppdatering av appen er tilgjengelig.', {
             action: 'Oppdater',
             closeable: true
           })

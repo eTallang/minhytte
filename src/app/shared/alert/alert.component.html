@@ -1,10 +1,10 @@
 <div class="mh-alert__title-container">
-  <h1>{{ config.title }}</h1>
+  <h1 class="mh-alert__title">{{ config.title }}</h1>
   <button class="mh-alert__close-button" (click)="closeAlert()" *ngIf="config.closeable">
-    <mh-icon name="close" size="medium"></mh-icon>
+    <mh-icon name="close"></mh-icon>
   </button>
 </div>
-<p>{{ config.content }}</p>
-<button class="mh-button" (click)="closeAlert(true)" *ngIf="config.action">
+<p class="mh-alert__description">{{ config.content }}</p>
+<button class="mh-button mh-alert__accept-button" (click)="closeAlert(true)" *ngIf="config.action">
   {{ config.action }}
 </button>

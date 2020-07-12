@@ -28,7 +28,9 @@ export class AlertComponent implements OnInit {
   private result: boolean | undefined;
   animationState: 'open' | 'closed' | 'void' = 'void';
 
-  @HostBinding('@fromBelow') animation = true;
+  @HostBinding('@fromBelow') get animation(): string {
+    return this.animationState;
+  }
 
   @HostBinding('class.mh-alert--info') get infoClass() {
     return this.config.severity === 'info';
