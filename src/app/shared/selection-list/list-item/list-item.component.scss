@@ -93,10 +93,12 @@
     color: var(--color-text-200);
   }
 
+  flex: 1;
   background: transparent;
   border: none;
   min-width: 0;
   padding: 0;
+  text-overflow: ellipsis;
   outline: none;
 }
 
