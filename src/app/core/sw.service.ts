@@ -11,7 +11,7 @@ export class SwService {
     this.swUpdate.available.subscribe((d) => {
       if (d.current !== d.available) {
         this.alertService
-          .open('Hei du!', 'En ny oppdatering av appen er tilgjengelig.', {
+          .open('Hei du!', 'En ny oppdatering av appen er tilgjengelig. Trykk på knappen nedenfor for å få siste versjon.', {
             action: 'Oppdater',
             closeable: true
           })
@@ -23,5 +23,16 @@ export class SwService {
           });
       }
     });
+    this.alertService
+      .open('Hei du!', 'En ny oppdatering av appen er tilgjengelig. Trykk på knappen nedenfor for å se siste versjon.', {
+        action: 'Oppdater',
+        closeable: true
+      })
+      .afterClosed()
+      .subscribe((refresh) => {
+        if (refresh) {
+          location.reload();
+        }
+      });
   }
 }

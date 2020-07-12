@@ -1,6 +1,10 @@
 @import 'mixins';
 
 .mh-alert {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-auto-rows: auto;
+  gap: var(--spacing-one) 0;
   background-color: var(--color-bg);
   padding: var(--spacing-two);
   border-top: var(--spacing-quarter) solid var(--color-primary-200);
@@ -9,21 +13,19 @@
   box-shadow: 0 -16px 16px 0 rgba(32, 59, 140, 0.08);
 }
 
-.mh-alert__title-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
 .mh-alert__title {
   margin: 0;
   padding: 0;
-  font-size: var(--spacing-two);
+  font-size: var(--spacing-one-and-half);
+  grid-column: 1;
 }
 
 .mh-alert__close-button {
   @include button-reset();
   background-color: transparent;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: flex-start;
 
   mh-icon {
     color: var(--color-primary-200);
@@ -31,9 +33,12 @@
 }
 
 .mh-alert__description {
-  margin: var(--spacing-two) 0 var(--spacing-one);
+  margin: 0;
+  grid-column: 1;
 }
 
 .mh-alert__accept-button {
-  margin: 0 0 calc(var(--spacing-one) * -1) calc(var(--spacing-two) * -1);
+  margin-left: auto;
+  margin-right: calc(var(--spacing-two) * -1);
+  grid-column: 1 / -1;
 }

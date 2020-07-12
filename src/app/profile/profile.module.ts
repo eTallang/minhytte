@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
-import { IconModule, InputModule } from '../shared';
+import { IconModule, InputModule, AlertModule } from '../shared';
 
 
 @NgModule({
@@ -13,6 +13,7 @@ import { IconModule, InputModule } from '../shared';
   imports: [
     CommonModule,
     IconModule,
+    AlertModule,
     ProfileRoutingModule,
     ReactiveFormsModule,
     InputModule,

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AlertService } from '../shared/alert/alert.service';
 
 @Component({
   selector: 'mh-profile',
@@ -19,8 +20,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   oldEmail: string | null | undefined;
   password = new FormControl('', Validators.required);
   passwordInputType: 'password' | 'text' = 'password';
+  updatingPassword = false;
 
-  constructor(private auth: AngularFireAuth, private router: Router) {}
+  constructor(private auth: AngularFireAuth, private router: Router, private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.auth.user.pipe(takeUntil(this.unsubscriber)).subscribe((user) => {
@@ -44,7 +46,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   updatePassword(): void {
-    this.user?.updatePassword(this.password.value);
+    this.updatingPassword = true;
+    this.user?.updatePassword(this.password.value).then(() => {
+      this.updatingPassword = false;
+      this.showAlert('Passord er blitt endret.');
+    }, err => {
+      this.updatingPassword = false;
+      console.log(err);
+      this.showAlert(err.message);
+    });
   }
 
   updateEmail(): void {
@@ -79,5 +89,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.auth.signOut().then(() => {
       this.router.navigate(['login']);
     });
+  }
+
+  private showAlert(text: string): void {
+    this.alertService.open(undefined, text);
   }
 }
