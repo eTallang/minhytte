@@ -1,4 +1,4 @@
-<h1 class="mh-alert__title">{{ config.title }}</h1>
+<h1 class="mh-alert__title" *ngIf="config.title">{{ config.title }}</h1>
 <p class="mh-alert__description">{{ config.content }}</p>
 <button class="mh-alert__close-button" (click)="closeAlert()" *ngIf="config.closeable">
   <mh-icon name="close" size="medium"></mh-icon>
