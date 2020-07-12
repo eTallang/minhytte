@@ -1,0 +1,20 @@
+@import 'mixins';
+
+.ix3-alert {
+  background-color: var(--color-bg);
+  padding: var(--spacing-two);
+  border-top: var(--spacing-quarter) solid var(--color-primary);
+  width: 100%;
+  box-shadow: 0 16px 16px 0 rgba(39, 105, 201, 0.08);
+}
+
+.ix3-alert__title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.mh-alert__close-button {
+  @include button-reset();
+  background-color: transparent;
+}
