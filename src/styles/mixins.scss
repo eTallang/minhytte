@@ -38,3 +38,7 @@
     @content;
   }
 }
+
+@mixin font-weight($weight) {
+  font-variation-settings: 'wght' $weight;
+}

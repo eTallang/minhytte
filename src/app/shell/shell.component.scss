@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .header {
   position: fixed;
   top: 0;
@@ -10,9 +12,9 @@
   background-color: var(--color-bg);
   height: var(--spacing-four);
   transition: box-shadow 300ms ease;
-  
+
   &.shadow {
-    box-shadow: 0 16px 16px 0 rgba(32,59,140, 0.08);
+    box-shadow: 0 16px 16px 0 rgba(32, 59, 140, 0.08);
   }
 }
 
@@ -24,6 +26,8 @@
   text-decoration: none;
 
   .user-circle {
+    @include font-weight(700);
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +35,6 @@
     line-height: 0;
     font-size: 0.875rem;
     margin-left: var(--spacing-half);
-    font-weight: 700;
     width: var(--spacing-one-and-half);
     height: var(--spacing-one-and-half);
     color: var(--color-text-dark);
