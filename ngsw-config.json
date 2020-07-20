@@ -17,18 +17,5 @@
         "files": ["/assets/**", "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"]
       }
     }
-  ],
-  "dataGroups": [
-    {
-      "name": "api",
-      "version": 1,
-      "urls": ["https://firestore.googleapis.com/**"],
-      "cacheConfig": {
-        "maxSize": 500,
-        "maxAge": "1d",
-        "strategy": "freshness",
-        "timeout": "0u"
-      }
-    }
   ]
 }
