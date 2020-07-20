@@ -1,4 +1,4 @@
-<div class="list-item-container" #label [ngClass]="{'indented': hasFocus}">
+<div class="list-item-container" #label>
   <label *ngIf="!empty; else addIcon">
     <input
       type="checkbox"
@@ -26,7 +26,7 @@
     #input
   />
 
-  <button class="delete-button" *ngIf="!empty && hasFocus" (click)="remove.emit()">
+  <button class="delete-button" *ngIf="!empty" (click)="remove.emit()">
     <mh-icon size="medium" name="close"></mh-icon>
   </button>
 </div>

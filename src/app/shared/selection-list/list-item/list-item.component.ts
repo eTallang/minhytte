@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { DragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'mh-list-item',
@@ -20,7 +19,6 @@ import { DragDrop } from '@angular/cdk/drag-drop';
 export class ListItemComponent implements OnInit, AfterViewInit {
   @ViewChild('checkbox') checkboxElement!: ElementRef<HTMLInputElement>;
   @ViewChild('label') labelElement!: ElementRef<HTMLElement>;
-  @ViewChild('input') inputElement!: ElementRef<HTMLInputElement>;
 
   hasFocus = false;
   oldValue = '';
@@ -49,11 +47,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   @Output() valueChange = new EventEmitter<string>();
   @Output() remove = new EventEmitter<void>();
 
-  constructor(
-    private focusMonitor: FocusMonitor,
-    private dragDrop: DragDrop,
-    private elementRef: ElementRef<HTMLElement>
-  ) {}
+  constructor(private focusMonitor: FocusMonitor) {}
 
   ngOnInit(): void {
     this.oldValue = this.value;
@@ -65,10 +59,6 @@ export class ListItemComponent implements OnInit, AfterViewInit {
         this.checkboxElement.nativeElement.focus();
       }
     });
-
-    if (!this.empty) {
-      this.createDrag();
-    }
   }
 
   toggle(): void {
@@ -90,23 +80,11 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   onInputBlur(): void {
     if (this.value !== this.oldValue) {
       this.valueChange.emit(this.value);
-      this.oldValue = this.value;
       if (this.empty) {
         this.value = '';
+      } else {
+        this.oldValue = this.value;
       }
     }
-  }
-
-  private createDrag() {
-    const dragItem = this.dragDrop.createDrag(this.labelElement.nativeElement);
-    dragItem.dropped.subscribe((e) => {
-      if (e.distance.x < -50) {
-        this.hasFocus = true;
-      } else {
-        this.hasFocus = false;
-      }
-    });
-    const dropList = this.dragDrop.createDropList(this.elementRef.nativeElement).withItems([dragItem]);
-    dropList.lockAxis = 'x';
   }
 }

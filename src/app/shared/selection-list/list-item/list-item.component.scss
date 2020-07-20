@@ -20,21 +20,9 @@
     cursor: pointer;
   }
 
-  &.cdk-drag-placeholder {
-    opacity: 0;
-  }
-
-  &.indented {
-    transform: translate3d(-20px, 0, 0);
-  }
-
   mh-icon {
-    color: var(--color-primary);
+    color: var(--color-primary-200);
   }
-}
-
-.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .checkbox-container,
