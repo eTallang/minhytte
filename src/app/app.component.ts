@@ -24,11 +24,19 @@ export class AppComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscriber)
       )
       .subscribe(() => {
+        if (!this.swUpdate.isEnabled) {
+          return;
+        }
+
         this.swUpdate.checkForUpdate();
       });
   }
 
   private checkForUpdates() {
+    if (!this.swUpdate.isEnabled) {
+      return;
+    }
+
     this.swUpdate.available.pipe(takeUntil(this.unsubscriber)).subscribe((d) => {
       if (d.current !== d.available) {
         this.alert
