@@ -2,7 +2,7 @@ export class Item {
   id?: string;
   value?: string;
   added?: Date;
-  inBasket?: boolean;
+  inCart?: boolean;
   removed?: boolean;
 }
 

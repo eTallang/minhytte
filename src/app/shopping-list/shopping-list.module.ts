@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ShoppingListRoutingModule } from './shopping-list-routing.module';
 import { ShoppingListComponent } from './shopping-list.component';
 import { SelectionListModule } from '../shared/selection-list/selection-list.module';
-import { SeparatorModule } from '../shared';
+import { SeparatorModule, AlertModule } from '../shared';
 
 @NgModule({
   declarations: [ShoppingListComponent],
@@ -14,7 +14,8 @@ import { SeparatorModule } from '../shared';
     ShoppingListRoutingModule,
     AngularFirestoreModule,
     SelectionListModule,
-    SeparatorModule
+    SeparatorModule,
+    AlertModule
   ]
 })
 export class ShoppingListModule {}

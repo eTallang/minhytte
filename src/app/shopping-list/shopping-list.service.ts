@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, skip, take } from 'rxjs/operators';
-import { Observable, merge } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Item, ItemChange } from './item';
 
@@ -9,15 +9,16 @@ import { Item, ItemChange } from './item';
   providedIn: 'root'
 })
 export class ShoppingListService {
+  private previousRemovedItems: Item[] = [];
   private collectionName = 'shopping-list';
 
   constructor(private store: AngularFirestore) {}
 
-  getInBasket(): Observable<Item[]> {
+  getInCart(): Observable<Item[]> {
     return this.getItems(true);
   }
 
-  getInBasketChanges(): Observable<ItemChange[]> {
+  getInCartChanges(): Observable<ItemChange[]> {
     return this.getItemChanges(true);
   }
 
@@ -30,7 +31,7 @@ export class ShoppingListService {
   }
 
   toggleItem(item: Item): void {
-    this.store.collection(this.collectionName).doc(item.id).update({ inBasket: !item.inBasket });
+    this.store.collection(this.collectionName).doc(item.id).update({ inCart: !item.inCart });
   }
 
   changeItemValue(item: Item, value: string): void {
@@ -42,33 +43,42 @@ export class ShoppingListService {
   }
 
   removeItems(items: Item[]): void {
+    this.previousRemovedItems = items.slice();
     items.forEach((item) => {
       this.store.collection(this.collectionName).doc(item.id).delete();
     });
   }
 
-  createItem(value: string): void {
+  createItem(value: string, inCart = false): void {
     this.store.collection<Item>(this.collectionName).add({
       added: new Date(),
-      inBasket: false,
+      inCart: inCart,
       removed: false,
       value: value
     });
   }
 
-  private getItems(inBasket: boolean): Observable<Item[]> {
+  undo(): void {
+    if (this.previousRemovedItems) {
+      this.previousRemovedItems.forEach(item => {
+        this.createItem(item.value!, item.inCart);
+      });
+    }
+  }
+
+  private getItems(inCart: boolean): Observable<Item[]> {
     return this.store
       .collection<Item>(this.collectionName, (list) =>
-        list.where('inBasket', '==', inBasket).orderBy('added', 'asc')
+        list.where('inCart', '==', inCart).orderBy('added', 'asc')
       )
       .valueChanges({ idField: 'id' })
       .pipe(take(1));
   }
 
-  private getItemChanges(inBasket: boolean): Observable<ItemChange[]> {
+  private getItemChanges(inCart: boolean): Observable<ItemChange[]> {
     return this.store
       .collection<Item>(this.collectionName, (list) =>
-        list.where('inBasket', '==', inBasket).orderBy('added', 'asc')
+        list.where('inCart', '==', inCart).orderBy('added', 'asc')
       )
       .stateChanges()
       .pipe(

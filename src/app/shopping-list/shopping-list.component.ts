@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { Item, ItemChange } from './item';
 import { ShoppingListService } from './shopping-list.service';
 import { listAnimation } from '../core/animations';
+import { AlertService } from '../shared/alert/alert.service';
 
 @Component({
   selector: 'mh-shopping-list',
@@ -15,9 +16,9 @@ import { listAnimation } from '../core/animations';
 export class ShoppingListComponent implements OnInit, OnDestroy {
   private unsubscriber = new Subject<void>();
   remaining: Item[] = [];
-  inBasket: Item[] = [];
+  inCart: Item[] = [];
 
-  constructor(private service: ShoppingListService) {}
+  constructor(private service: ShoppingListService, private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.service
@@ -30,13 +31,13 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       .subscribe((changes) => this.updateList(this.remaining, changes));
 
     this.service
-      .getInBasket()
+      .getInCart()
       .pipe(takeUntil(this.unsubscriber))
-      .subscribe((inBasket) => (this.inBasket = inBasket));
+      .subscribe((inCart) => (this.inCart = inCart));
     this.service
-      .getInBasketChanges()
+      .getInCartChanges()
       .pipe(takeUntil(this.unsubscriber))
-      .subscribe((changes) => this.updateList(this.inBasket, changes));
+      .subscribe((changes) => this.updateList(this.inCart, changes));
   }
 
   ngOnDestroy(): void {
@@ -59,10 +60,19 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   removeValue(item: Item): void {
     this.service.removeItems([item]);
+    this.alertService.open('', 'Element ble slettet.', {
+      action: 'Angre',
+      duration: 3000,
+      closeable: false
+    }).afterClosed().subscribe(undo => {
+      if (undo) {
+        this.service.undo();
+      }
+    });
   }
 
   emptyCart(): void {
-    this.service.removeItems(this.inBasket);
+    this.service.removeItems(this.inCart);
   }
 
   private updateList(list: Item[], changes: ItemChange[]): void {

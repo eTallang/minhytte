@@ -3,23 +3,25 @@
   <mh-list-item
     *ngFor="let item of remaining"
     [value]="item.value"
-    [checked]="item.inBasket"
+    [checked]="item.inCart"
     (remove)="removeValue(item)"
     (checkChange)="toggleItem(item)"
     (valueChange)="changeValue(item, $event)"
   ></mh-list-item>
   <mh-list-item empty (valueChange)="addItem($event)"></mh-list-item>
 </mh-selection-list>
+
 <mh-separator></mh-separator>
+
 <div class="title-container">
   <h2>I kurven</h2>
   <button class="mh-button" (click)="emptyCart()">Tøm</button>
 </div>
-<mh-selection-list [@listAnimation]="inBasket.length">
+<mh-selection-list [@listAnimation]="inCart.length">
   <mh-list-item
-    *ngFor="let item of inBasket"
+    *ngFor="let item of inCart"
     [value]="item.value"
-    [checked]="item.inBasket"
+    [checked]="item.inCart"
     (remove)="removeValue(item)"
     (checkChange)="toggleItem(item)"
     (valueChange)="changeValue(item, $event)"
