@@ -1,8 +1,8 @@
 <h1 class="mh-alert__title" *ngIf="config.title">{{ config.title }}</h1>
-<p class="mh-alert__description">{{ config.content }}</p>
+<p [ngClass]="{'center': !config.closeable && config.action}" class="mh-alert__description">{{ config.content }}</p>
 <button class="mh-alert__close-button" (click)="closeAlert()" *ngIf="config.closeable">
   <mh-icon name="close" size="medium"></mh-icon>
 </button>
-<button class="mh-button mh-alert__accept-button" (click)="closeAlert(true)" *ngIf="config.action">
+<button class="mh-button mh-alert__accept-button" [ngClass]="{'inline': !config.closeable}" (click)="closeAlert(true)" *ngIf="config.action">
   {{ config.action }}
 </button>

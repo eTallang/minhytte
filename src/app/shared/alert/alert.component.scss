@@ -6,7 +6,7 @@
   grid-auto-rows: auto;
   gap: var(--spacing-one) 0;
   background-color: var(--color-bg);
-  padding: var(--spacing-two);
+  padding: var(--spacing-one-and-half);
   border-top: var(--spacing-quarter) solid var(--color-primary-200);
   border-radius: 16px 16px 0 0;
   width: 100%;
@@ -35,10 +35,19 @@
 .mh-alert__description {
   margin: 0;
   grid-column: 1;
+
+  &.center {
+    align-self: center;
+  }
 }
 
 .mh-alert__accept-button {
   margin-left: auto;
-  margin-right: calc(var(--spacing-two) * -1);
+  margin-right: calc(var(--spacing-one) * -1);
   grid-column: 1 / -1;
+
+  &.inline {
+    grid-column: 2;
+    grid-row: 1;
+  }
 }

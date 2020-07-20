@@ -57,7 +57,7 @@ export class AlertComponent implements OnInit {
 
   ngOnInit(): void {
     this.animationState = 'open';
-    if (!this.config.action) {
+    if (!this.config.action || this.config.action && !this.config.closeable) {
       this.timer = setTimeout(() => {
         this.animationState = 'closed';
       }, this.config.duration);

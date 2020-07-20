@@ -43,7 +43,7 @@
       <mh-icon size="medium" [name]="passwordInputType === 'text' ? 'eye-off' : 'eye'"></mh-icon>
     </button>
   </mh-input-container>
-  <button class="mh-button" [disabled]="password.invalid || updatingPassword" (click)="updatePassword()">
+  <button class="mh-button submit-button" [disabled]="password.invalid || updatingPassword" (click)="updatePassword()">
     Bytt
   </button>
 

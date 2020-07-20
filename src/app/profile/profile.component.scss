@@ -65,11 +65,16 @@
 
   .input-type-toggle {
     @include button-reset();
+    height: var(--spacing-one-and-half);
 
     mh-icon {
       color: var(--color-primary-200);
     }
   }
+}
+
+.submit-button {
+  margin-top: var(--spacing-one);
 }
 
 .sign-out-button {
